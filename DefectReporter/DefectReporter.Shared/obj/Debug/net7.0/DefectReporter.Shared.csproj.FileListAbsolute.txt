@@ -1,0 +1,11 @@
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\bin\Debug\net7.0\DefectReporter.Shared.deps.json
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\bin\Debug\net7.0\DefectReporter.Shared.dll
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\bin\Debug\net7.0\DefectReporter.Shared.pdb
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.GeneratedMSBuildEditorConfig.editorconfig
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.AssemblyInfoInputs.cache
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.AssemblyInfo.cs
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.csproj.CoreCompileInputs.cache
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.dll
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\refint\DefectReporter.Shared.dll
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.pdb
+\\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\ref\DefectReporter.Shared.dll
