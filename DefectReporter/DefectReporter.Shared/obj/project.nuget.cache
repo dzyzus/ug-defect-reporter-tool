@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ORV29KWCw+Ch/5v8KFZcG4lfsuUdmGFVkG0IxryhRqGSxlwEPo5ijiNL+OGa5A/N53V/N3Jp/p09FE1cfs6hUg==",
+  "dgSpecHash": "GLROyOcXUghYrISdeU32xwGBfhSMbBCrb1B/xFpsArojFW1t4vbh1GEPP6uDVt9zGvd5OwMc9njXz5ENc1+oyA==",
   "success": true,
-  "projectFilePath": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj",
+  "projectFilePath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

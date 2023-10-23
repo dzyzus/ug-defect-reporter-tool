@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj": {}
+    "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj": {}
   },
   "projects": {
-    "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj": {
+    "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj",
         "projectName": "DefectReporter.Shared",
-        "projectPath": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj",
-        "packagesPath": "C:\\Users\\mmarzec\\.nuget\\packages\\",
-        "outputPath": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\obj\\",
+        "projectPath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\DefectReporter.Shared.csproj",
+        "packagesPath": "C:\\Users\\wrkmm\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Shared\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "\\\\NAS1\\home\\mmarzec\\AppData(Roaming)\\NuGet\\NuGet.Config",
+          "C:\\Users\\wrkmm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -55,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

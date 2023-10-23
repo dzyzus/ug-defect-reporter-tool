@@ -9,3 +9,15 @@
 \\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\refint\DefectReporter.Shared.dll
 \\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.pdb
 \\NAS1\home\mmarzec\Documents\GitHub\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\ref\DefectReporter.Shared.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\bin\Debug\net7.0\DefectReporter.Shared.deps.json
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\bin\Debug\net7.0\DefectReporter.Shared.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\bin\Debug\net7.0\DefectReporter.Shared.pdb
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.csproj.AssemblyReference.cache
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.AssemblyInfoInputs.cache
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.AssemblyInfo.cs
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.csproj.CoreCompileInputs.cache
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\refint\DefectReporter.Shared.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\DefectReporter.Shared.pdb
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\DefectReporter.Shared\obj\Debug\net7.0\ref\DefectReporter.Shared.dll

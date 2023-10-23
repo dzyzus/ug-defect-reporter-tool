@@ -1,59 +1,59 @@
 {
   "Files": [
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\DefectReporter.Server.bundle.scp.css",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\DefectReporter.Server.bundle.scp.css",
       "PackagePath": "staticwebassets\\DefectReporter.Server.bundle.scp.css"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "PackagePath": "staticwebassets\\css\\open-iconic"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "PackagePath": "staticwebassets\\css\\open-iconic"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\README.md",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\README.md",
       "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "\\\\NAS1\\home\\mmarzec\\Documents\\GitHub\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\DefectReporter.Server\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
