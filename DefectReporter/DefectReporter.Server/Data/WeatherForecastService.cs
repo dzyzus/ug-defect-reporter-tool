@@ -1,5 +1,3 @@
-using DefectReporter.Shared;
-
 namespace DefectReporter.Server.Data
 {
     public class WeatherForecastService
