@@ -1,0 +1,56 @@
+﻿@page "/defect/index"
+
+@inject HttpClient Http
+
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+@using DefectReporter.Shared.Models.Application
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@if (defects.Length != 0 || defects == null)
+{
+    <h3>Lista defektów</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Wersja oprogramowania</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var defect in defects)
+            {
+                <tr>
+                    <td>@defect.Id</td>
+                    <td>@defect.Title</td>
+                    <td>@defect.Description</td>
+                    <td>@defect.SoftwareBuild</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>Currently there is no defects in database.</h3>    
+}
+
+@code {
+    private Defect[]? defects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            defects = await Http.GetFromJsonAsync<Defect[]>("api/defects");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+}

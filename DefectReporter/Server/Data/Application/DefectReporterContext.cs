@@ -20,6 +20,16 @@
         public DbSet<Defect> Defects { get; set; }
 
         /// <summary>
+        /// The db set of features.
+        /// </summary>
+        public DbSet<Feature> Features { get; set; }
+
+        /// <summary>
+        /// The db set of releases.
+        /// </summary>
+        public DbSet<Release> Releases { get; set; }
+
+        /// <summary>
         /// The db set of comments.
         /// </summary>
         public DbSet<Comment> Comments { get; set; }

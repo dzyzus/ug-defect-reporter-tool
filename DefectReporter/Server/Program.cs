@@ -21,9 +21,8 @@ namespace DefectReporter
 
             // Add services to the container.
             builder.Services.AddDbContext<IdentityDbContext>(options =>
-                options.UseSqlServer("DefectReporterUsersDb"));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-            
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefectReporterUsersDb")));
+
             builder.Services.AddDbContext<DefectReporterContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefectReporterAppDb")));
 

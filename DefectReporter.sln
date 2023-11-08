@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefectReporter.Server", "DefectReporter\Server\DefectReporter.Server.csproj", "{A69EA32A-BA04-4869-8E19-D7FB7C54B9BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefectReporter.Server", "DefectReporter\Server\DefectReporter.Server.csproj", "{A69EA32A-BA04-4869-8E19-D7FB7C54B9BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefectReporter.Client", "DefectReporter\Client\DefectReporter.Client.csproj", "{36B7E105-2EA2-41FF-86A2-0A64F5604207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefectReporter.Client", "DefectReporter\Client\DefectReporter.Client.csproj", "{36B7E105-2EA2-41FF-86A2-0A64F5604207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefectReporter.Shared", "DefectReporter\Shared\DefectReporter.Shared.csproj", "{3BA4D22C-E8D0-464D-BECD-D12760E68053}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefectReporter.Shared", "DefectReporter\Shared\DefectReporter.Shared.csproj", "{3BA4D22C-E8D0-464D-BECD-D12760E68053}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
