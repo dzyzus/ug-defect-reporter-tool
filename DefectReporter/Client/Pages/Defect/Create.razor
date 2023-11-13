@@ -4,7 +4,7 @@
 
 @using DefectReporter.Shared.Models.Application
 
-<h3>Utwórz nowy defekt</h3>
+<h3>Report new defect</h3>
 
 @if (successMessage != null)
 {
@@ -30,12 +30,12 @@
         <textarea id="Description" class="form-control" @bind="defect.Description"></textarea>
     </div>
     <div class="form-group">
-    <label for="SoftwareBuild">Wersja oprogramowania:</label>
+        <label for="SoftwareBuild">Wersja oprogramowania:</label>
         <select id="SoftwareBuild" class="form-control" @bind="defect.SoftwareBuild">
-                @foreach (var release in releases)
-                {
-                    <option value="@release.Name">@release.Name</option>
-                }
+            @foreach (var release in releases)
+            {
+                <option value="@release.Name">@release.Name</option>
+            }
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Dodaj defekt</button>
@@ -51,7 +51,7 @@
     {
         try
         {
-            releases = await Http.GetFromJsonAsync<List<Release>>("api/releases");
+            releases = await Http.GetFromJsonAsync<List<Release>>("api/defect/getReleases");
         }
         catch (Exception ex)
         {
@@ -63,7 +63,7 @@
     {
         try
         {
-            var response = await Http.PostAsJsonAsync("Defect", defect);
+            var response = await Http.PostAsJsonAsync("api/defect/addDefect", defect);
             if (response.IsSuccessStatusCode)
             {
                 successMessage = "Defect submitted.";
@@ -76,7 +76,7 @@
         }
         catch (Exception ex)
         {
-            errorMessage = "Wystąpił błąd: " + ex.Message;
+            errorMessage = "Error occurs: " + ex.Message;
         }
     }
 }

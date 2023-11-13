@@ -71,15 +71,9 @@
                 .HasForeignKey(p => p.ReleaseId);
 
             modelBuilder.Entity<Release>().HasData(
-                new { Id = 1, Name = "0.8 Pre-Alpha" },
-                new { Id = 2, Name = "0.9 Pre-Alpha" },
-                new { Id = 3, Name = "1.0 Alpha" },
-                new { Id = 4, Name = "1.1 Alpha" },
-                new { Id = 5, Name = "1.2 Alpha" },
-                new { Id = 6, Name = "1.0 Beta" },
-                new { Id = 7, Name = "1.1 Beta" },
-                new { Id = 8, Name = "1.2 Beta" },
-                new { Id = 9, Name = "1.0 Release Candidate" }
+                new { Id = 1, Name = "Pre-Alpha" },
+                new { Id = 2, Name = "Alpha" },
+                new { Id = 3, Name = "Beta" }
             );
         }
     }

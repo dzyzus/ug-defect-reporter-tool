@@ -1,14 +1,10 @@
 ﻿@page "/defect/index"
 
-@inject HttpClient Http
-
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
-
 @using DefectReporter.Shared.Models.Application
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IHttpClientFactory HttpClientFactory
 
-@if (defects.Length != 0 || defects == null)
+@if (defects.Count != 0)
 {
     <h3>Lista defektów</h3>
 
@@ -40,13 +36,15 @@ else
 }
 
 @code {
-    private Defect[]? defects;
+    List<Defect> defects = new List<Defect>();
 
     protected override async Task OnInitializedAsync()
     {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
         try
         {
-            defects = await Http.GetFromJsonAsync<Defect[]>("api/defects");
+            defects = await client.GetFromJsonAsync<List<Defect>>("api/defect/getdefects");
         }
         catch (AccessTokenNotAvailableException exception)
         {

@@ -6,6 +6,7 @@ namespace DefectReporter
     using DefectReporter.Server.Data.Identity;
     using DefectReporter.Shared.Models.Identity;
     using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.EntityFrameworkCore;
 
     #endregion
@@ -26,6 +27,10 @@ namespace DefectReporter
             builder.Services.AddDbContext<DefectReporterContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefectReporterAppDb")));
 
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                builder.Configuration.Bind("Local", options.ProviderOptions);
+            });
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<IdentityDbContext>();
@@ -38,6 +43,11 @@ namespace DefectReporter
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+
+            // Register HttpClient in DI
+            builder.Services.AddHttpClient();
+
+            builder.Services.AddControllers();
 
             var app = builder.Build();
 
@@ -63,7 +73,6 @@ namespace DefectReporter
 
             app.UseIdentityServer();
             app.UseAuthorization();
-
 
             app.MapRazorPages();
             app.MapControllers();

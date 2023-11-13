@@ -2,34 +2,52 @@
 using DefectReporter.Shared.Models.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DefectReporter.Server.Controllers
 {
-    [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class DefectController : ControllerBase
     {
-        private readonly ILogger<DefectController> _logger;
-
         private readonly DefectReporterContext _context;
 
         public DefectController(ILogger<DefectController> logger, DefectReporterContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
-        [HttpGet("api/defects")]
-        public IEnumerable<Defect> GetDefects()
+        [HttpGet("getDefects")]
+        public async Task<List<Defect>> GetDefects()
         {
-            return _context.Defects.Select(defect => defect).ToArray();
+            return await _context.Defects.AsNoTracking().ToListAsync();
         }
 
-        [HttpGet("api/releases")]
-        public List<Release> GetReleases()
+        [HttpGet("getReleases")]
+        public async Task<List<Release>> GetReleases()
         {
-            return _context.Releases.Select(release => release).ToList();
+            return await _context.Releases.AsNoTracking().ToListAsync();
+        }
+
+        [HttpPost("addDefect")]
+        public async Task<IActionResult> AddDefect([FromBody] Defect defect)
+        {
+            try
+            {
+                if (defect == null)
+                {
+                    return BadRequest("Invalid defect data.");
+                }
+
+                _context.Defects.Add(defect);
+                await _context.SaveChangesAsync();
+
+                return Ok("Defect added successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
         }
     }
 }

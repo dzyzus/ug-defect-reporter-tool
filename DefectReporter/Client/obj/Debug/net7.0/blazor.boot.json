@@ -211,15 +211,15 @@
       "mscorlib.dll": "sha256-T52Qf1cS\/UysEoWOoE2ptEJEXfGpanQX5KNLyDiLv1E=",
       "netstandard.dll": "sha256-p32h5P3QmHJ\/FGoeE6m7f5g\/8ng2PSPGZktHyMadvIs=",
       "System.Private.CoreLib.dll": "sha256-6MwQcyKbqBsoZYOcD9fQJ4iKcn1qMmWRWVEkU2LLCb0=",
-      "DefectReporter.Shared.dll": "sha256-lvpJfHGacbnY\/Hl2Fp2oIfEcd1hB4vNptgwU87OQLM4=",
-      "DefectReporter.Client.dll": "sha256-gFMv+yS0PG+W8V4GVFA+8nKrxFqFoTO57duxRx41UxU="
+      "DefectReporter.Shared.dll": "sha256-xszV79mF976Qt8Rw6I733SWJyRFxMr+\/hcbyz3kWfms=",
+      "DefectReporter.Client.dll": "sha256-qJoqeyqB1ZFuZK4UYRFtxssm1fik\/g1TkVY3vHpu7Yc="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "DefectReporter.Shared.pdb": "sha256-NKPat1iBYHTziL9vOUX2kqqp4mWL+Oszmsk+jZSxU1c=",
-      "DefectReporter.Client.pdb": "sha256-kto3SX7xwIt\/jkRWYLenDHsWS5gK7KT+09tq08UDeXM="
+      "DefectReporter.Shared.pdb": "sha256-k2VLjTEJQpyY7lXyDmRlsIMLYKr6kkTDAJEVbOv4BrE=",
+      "DefectReporter.Client.pdb": "sha256-RB9b10PS\/ZJ8cyJ1x8MB195s6u0hmsa7lXsZsFBng9Q="
     },
     "runtime": {
       "dotnet.7.0.2.c0xuvk17sp.js": "sha256-4mh03qTse0uNR+dQ6ydExm4jJXph0RE8zGNCtF0jiNA=",
