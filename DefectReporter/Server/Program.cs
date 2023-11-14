@@ -6,7 +6,6 @@ namespace DefectReporter
     using DefectReporter.Server.Data.Identity;
     using DefectReporter.Shared.Models.Identity;
     using Microsoft.AspNetCore.Authentication;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.EntityFrameworkCore;
 
     #endregion
@@ -40,6 +39,7 @@ namespace DefectReporter
 
             builder.Services.AddAuthentication()
                 .AddIdentityServerJwt();
+
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();

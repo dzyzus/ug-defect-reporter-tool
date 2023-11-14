@@ -1,82 +1,60 @@
 ﻿@page "/defect/create"
 
-@inject HttpClient Http
-
 @using DefectReporter.Shared.Models.Application
+@inject IHttpClientFactory HttpClientFactory
 
-<h3>Report new defect</h3>
+<h3>Create Defect</h3>
 
 @if (successMessage != null)
 {
-    <div class="alert alert-success">
-        @successMessage
-    </div>
+    <p>@successMessage</p>
 }
-
-@if (errorMessage != null)
+else
 {
-    <div class="alert alert-danger">
-        @errorMessage
-    </div>
-}
+    <EditForm Model="@defect" OnValidSubmit="CreateDefect">
+        <DataAnnotationsValidator />
 
-<form @onsubmit="CreateDefect">
-    <div class="form-group">
-        <label for="Title">Tytuł:</label>
-        <input type="text" id="Title" class="form-control" @bind="defect.Title" />
-    </div>
-    <div class="form-group">
-        <label for="Description">Opis:</label>
-        <textarea id="Description" class="form-control" @bind="defect.Description"></textarea>
-    </div>
-    <div class="form-group">
-        <label for="SoftwareBuild">Wersja oprogramowania:</label>
-        <select id="SoftwareBuild" class="form-control" @bind="defect.SoftwareBuild">
-            @foreach (var release in releases)
-            {
-                <option value="@release.Name">@release.Name</option>
-            }
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Dodaj defekt</button>
-</form>
+        <div class="form-group">
+            <label>Title</label>
+            <InputText @bind-Value="defect.Title" class="form-control" />
+            <ValidationMessage For="@(() => defect.Title)" />
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <InputTextArea @bind-Value="defect.Description" class="form-control"></InputTextArea>
+            <ValidationMessage For="@(() => defect.Description)" />
+        </div>
+
+        <div class="form-group">
+            <label>Software Build</label>
+            <InputText @bind-Value="defect.SoftwareBuild" class="form-control" />
+            <ValidationMessage For="@(() => defect.SoftwareBuild)" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </EditForm>
+}
 
 @code {
     private Defect defect = new Defect();
     private string successMessage;
-    private string errorMessage;
-    private List<Release> releases = new List<Release>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            releases = await Http.GetFromJsonAsync<List<Release>>("api/defect/getReleases");
-        }
-        catch (Exception ex)
-        {
-            errorMessage = "Error: " + ex.Message;
-        }
-    }
 
     private async Task CreateDefect()
     {
-        try
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        // Dodaj logikę walidacji, obsługi błędów itp.
+        var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
+
+        if (response.IsSuccessStatusCode)
         {
-            var response = await Http.PostAsJsonAsync("api/defect/addDefect", defect);
-            if (response.IsSuccessStatusCode)
-            {
-                successMessage = "Defect submitted.";
-                defect = new Defect();
-            }
-            else
-            {
-                errorMessage = "Get error during adding defect to database.";
-            }
+            successMessage = await response.Content.ReadAsStringAsync();
         }
-        catch (Exception ex)
+        else
         {
-            errorMessage = "Error occurs: " + ex.Message;
+            // Obsługa błędów
+            successMessage = "Failed to create defect.";
         }
     }
 }

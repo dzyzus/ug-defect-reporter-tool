@@ -117,6 +117,14 @@ C:\Users\wrkmm\source\DefectReporter\DefectReporter\Server\obj\Debug\net7.0\refi
 C:\Users\wrkmm\source\DefectReporter\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.pdb
 C:\Users\wrkmm\source\DefectReporter\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.genruntimeconfig.cache
 C:\Users\wrkmm\source\DefectReporter\DefectReporter\Server\obj\Debug\net7.0\ref\DefectReporter.Server.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.csproj.AssemblyReference.cache
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.AssemblyInfoInputs.cache
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.AssemblyInfo.cs
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.csproj.CoreCompileInputs.cache
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.RazorAssemblyInfo.cache
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.RazorAssemblyInfo.cs
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\bin\Debug\net7.0\DefectReporter.Client.staticwebassets.runtime.json
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\bin\Debug\net7.0\appsettings.json
@@ -390,15 +398,6 @@ C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Ser
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\bin\Debug\net7.0\DefectReporter.Shared.dll
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\bin\Debug\net7.0\DefectReporter.Client.pdb
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\bin\Debug\net7.0\DefectReporter.Shared.pdb
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.csproj.AssemblyReference.cache
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.AssemblyInfoInputs.cache
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.AssemblyInfo.cs
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.csproj.CoreCompileInputs.cache
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.RazorAssemblyInfo.cache
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.RazorAssemblyInfo.cs
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\staticwebassets\msbuild.DefectReporter.Server.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\staticwebassets\msbuild.build.DefectReporter.Server.props
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.DefectReporter.Server.props
@@ -413,3 +412,4 @@ C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Ser
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.pdb
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.genruntimeconfig.cache
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\ref\DefectReporter.Server.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.MvcApplicationPartsAssemblyInfo.cs

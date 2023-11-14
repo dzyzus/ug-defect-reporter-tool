@@ -38,6 +38,6 @@ namespace DefectReporter.Shared.Models.Application
         /// <summary>
         /// The comments.
         /// </summary>
-        public List<Comment> Comments { get; set; }
+        public List<Comment>? Comments { get; set; }
     }
 }

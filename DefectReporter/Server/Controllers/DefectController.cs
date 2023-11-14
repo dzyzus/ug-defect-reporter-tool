@@ -29,25 +29,17 @@ namespace DefectReporter.Server.Controllers
             return await _context.Releases.AsNoTracking().ToListAsync();
         }
 
-        [HttpPost("addDefect")]
-        public async Task<IActionResult> AddDefect([FromBody] Defect defect)
+        [HttpPost("createDefect")]
+        public async Task<IActionResult> CreateDefect([FromBody] Defect defect)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (defect == null)
-                {
-                    return BadRequest("Invalid defect data.");
-                }
-
                 _context.Defects.Add(defect);
                 await _context.SaveChangesAsync();
+                return Ok("Defect created successfully!");
+            }
 
-                return Ok("Defect added successfully.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error: {ex.Message}");
-            }
+            return BadRequest("Invalid defect data");
         }
     }
 }
