@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿namespace DefectReporter.Shared.Models.Identity
 {
     #region Usings
@@ -21,5 +22,13 @@
 
         [InverseProperty("CurrentUser")]
         public List<Defect> CurrentUserDefects { get; set; }
+=======
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace DefectReporter.Shared.Models.Identity
+{
+    public class ApplicationUser : IdentityUser
+    {
+>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
     }
 }

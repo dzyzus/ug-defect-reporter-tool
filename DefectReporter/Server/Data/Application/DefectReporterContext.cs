@@ -3,6 +3,7 @@
     #region Usings
 
     using DefectReporter.Shared.Models.Application;
+<<<<<<< HEAD
     using DefectReporter.Shared.Models.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Hosting;
@@ -12,6 +13,12 @@
     /// <summary>
     /// The defect reporter db context.
     /// </summary>
+=======
+    using Microsoft.EntityFrameworkCore;
+
+    #endregion
+
+>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
     public class DefectReporterContext : DbContext
     {
         /// <summary>
@@ -20,6 +27,7 @@
         public DbSet<Defect> Defects { get; set; }
 
         /// <summary>
+<<<<<<< HEAD
         /// The db set of features.
         /// </summary>
         public DbSet<Feature> Features { get; set; }
@@ -30,16 +38,21 @@
         public DbSet<Release> Releases { get; set; }
 
         /// <summary>
+=======
+>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
         /// The db set of comments.
         /// </summary>
         public DbSet<Comment> Comments { get; set; }
 
         /// <summary>
+<<<<<<< HEAD
         /// The db set of software builds.
         /// </summary>
         public DbSet<SoftwareBuild> SoftwareBuilds { get; set; }
 
         /// <summary>
+=======
+>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
         /// The defect reporter context constructor.
         /// </summary>
         /// <param name="options">
@@ -62,6 +75,7 @@
             modelBuilder.Entity<Comment>()
                 .HasOne(p => p.Defect)
                 .WithMany(c => c.Comments)
+<<<<<<< HEAD
                 .HasForeignKey(p => p.DefectId)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -107,5 +121,10 @@
                 new { Id = 3, Name = "Beta" }
             );
         }
+=======
+                .HasForeignKey(p => p.DefectId);
+        }
+
+>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
     }
 }
