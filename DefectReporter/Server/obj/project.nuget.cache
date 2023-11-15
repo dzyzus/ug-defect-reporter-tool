@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O13fMK6akETg1isY5st+BllWNXSoBg/V+x8cIcAZNKcXAHSs9ngu6MDngrR2r1h8+ZvL7ZKFaloOGxquTY1qtQ==",
+  "dgSpecHash": "laBZIaGty4UAsQF3FS7J5aKGNVSiPXxLMAULhwtX0JXG5IX/zLZRbcNu762KuKaAT+WY+sblXk1LU0OidlfAyg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Server\\DefectReporter.Server.csproj",
+  "projectFilePath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Server\\DefectReporter.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wrkmm\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",

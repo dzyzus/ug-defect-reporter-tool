@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uOmGXoFSKtHagkOcUCKo+sbWHF4mM8qbYDv+ttSa4esajunRTwe5J1sNl0TrNmwfVI1nOfKgzn/CdGbb+Ddfyg==",
+  "dgSpecHash": "TTAg1I0WSkXrdyqT/03TtSGIkLScSx2TJSnpgmt5/3RSeM/nrmcMHlr17XafkVt6Hly6tSXH/rVjg7S4rSIfvA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Client\\DefectReporter.Client.csproj",
+  "projectFilePath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\DefectReporter.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.2\\microsoft.aspnetcore.authorization.7.0.2.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.components\\7.0.2\\microsoft.aspnetcore.components.7.0.2.nupkg.sha512",

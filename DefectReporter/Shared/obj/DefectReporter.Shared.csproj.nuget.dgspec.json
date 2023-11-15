@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Shared\\DefectReporter.Shared.csproj": {}
+    "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Shared\\DefectReporter.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Shared\\DefectReporter.Shared.csproj": {
+    "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Shared\\DefectReporter.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Shared\\DefectReporter.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Shared\\DefectReporter.Shared.csproj",
         "projectName": "DefectReporter.Shared",
-        "projectPath": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Shared\\DefectReporter.Shared.csproj",
+        "projectPath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Shared\\DefectReporter.Shared.csproj",
         "packagesPath": "C:\\Users\\wrkmm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Shared\\obj\\",
+        "outputPath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

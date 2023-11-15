@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jDTWk/h5uV1E0t4ZjAo8lxc7YfmL6qwtw7fta2y4Pdv97PgKNBec2D7EHP8c1CCH2zWOdj3oanxaNHXl9I213Q==",
+  "dgSpecHash": "/63Mp84vs5pfSvG6X2rckB2n6vH+6ZC0c4qCg6QeiU0SOKJ9cMv3zRYsUXh51ENmQ/Opmzz7oBL3tt9sEef95A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Shared\\DefectReporter.Shared.csproj",
+  "projectFilePath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Shared\\DefectReporter.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.13\\microsoft.aspnetcore.cryptography.internal.7.0.13.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.13\\microsoft.aspnetcore.cryptography.keyderivation.7.0.13.nupkg.sha512",

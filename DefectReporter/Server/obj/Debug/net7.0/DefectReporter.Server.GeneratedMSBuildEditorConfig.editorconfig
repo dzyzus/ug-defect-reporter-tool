@@ -9,17 +9,17 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DefectReporter.Server
 build_property.RootNamespace = DefectReporter.Server
-build_property.ProjectDir = C:\Users\wrkmm\source\DefectReporter\DefectReporter\Server\
+build_property.ProjectDir = C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\wrkmm\source\DefectReporter\DefectReporter\Server
+build_property.MSBuildProjectDirectory = C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/wrkmm/source/DefectReporter/DefectReporter/Server/Areas/Identity/Pages/Shared/_LoginPartial.cshtml]
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Server/Areas/Identity/Pages/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/wrkmm/source/DefectReporter/DefectReporter/Server/Pages/Error.cshtml]
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Server/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
