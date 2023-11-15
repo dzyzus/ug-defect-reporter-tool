@@ -20,7 +20,7 @@
         public int Id { get; set; }
 
         /// <summary>
-        /// The title of defect.
+        /// The release name.
         /// </summary>
         [Required]
         public string Name { get; set; }
@@ -29,5 +29,15 @@
         /// The features.
         /// </summary>
         public List<Feature> Features { get; set; }
+
+        /// <summary>
+        /// The software builds.
+        /// </summary>
+        public List<SoftwareBuild> SoftwareBuilds { get; set; }
+
+        /// <summary>
+        /// The defect.
+        /// </summary>
+        public Defect? Defect { get; set; }
     }
 }

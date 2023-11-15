@@ -32,12 +32,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVmZWN0XEluZGV4LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Feature/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Feature/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/FrequentlyAskedQuestions.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRnJlcXVlbnRseUFza2VkUXVlc3Rpb25zLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Management/Releases/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlbWVudFxSZWxlYXNlc1xJbmRleC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Shared/LoginDisplay.razor]

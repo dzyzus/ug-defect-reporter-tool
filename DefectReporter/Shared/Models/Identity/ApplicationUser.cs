@@ -4,6 +4,7 @@
 
     using DefectReporter.Shared.Models.Application;
     using Microsoft.AspNetCore.Identity;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     #endregion
 
@@ -12,9 +13,13 @@
     /// </summary>
     public class ApplicationUser : IdentityUser
     {
-        /// <summary>
-        /// The comment.
-        /// </summary>
-        public Comment? Comment { get; set; }
+        [InverseProperty("Owner")]
+        public List<Defect> Defects { get; set; }
+
+        [InverseProperty("Owner")]
+        public List<Comment> Comments { get; set; }
+
+        [InverseProperty("CurrentUser")]
+        public List<Defect> CurrentUserDefects { get; set; }
     }
 }

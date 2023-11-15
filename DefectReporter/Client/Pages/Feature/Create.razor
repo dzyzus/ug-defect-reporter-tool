@@ -1,0 +1,35 @@
+﻿@page "/feature/create"
+
+@using DefectReporter.Shared.Models.Application
+@inject IHttpClientFactory HttpClientFactory
+
+<h3>Add feature</h3>
+
+@if (successMessage != null)
+{
+    <p>@successMessage</p>
+}
+else
+{
+}
+
+@code {
+    private Feature feature = new Feature();
+    private string successMessage;
+
+    private async Task AddFeature()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        var response = await client.PostAsJsonAsync("/api/feature/createFeature", feature);
+
+        if (response.IsSuccessStatusCode)
+        {
+            successMessage = await response.Content.ReadAsStringAsync();
+        }
+        else
+        {
+            successMessage = "Failed to add feature.";
+        }
+    }
+}

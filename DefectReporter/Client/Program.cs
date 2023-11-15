@@ -1,7 +1,9 @@
 using DefectReporter.Client;
+using DefectReporter.Shared.Models.Identity;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Identity;
 
 namespace DefectReporter.Client
 {

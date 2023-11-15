@@ -6,6 +6,7 @@ namespace DefectReporter
     using DefectReporter.Server.Data.Identity;
     using DefectReporter.Shared.Models.Identity;
     using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     #endregion
@@ -49,6 +50,8 @@ namespace DefectReporter
 
             builder.Services.AddControllers();
 
+            builder.Services.AddScoped<SeedData>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -89,6 +92,9 @@ namespace DefectReporter
                 {
                     dbContext.Database.EnsureCreated();
                     dbUserContext.Database.EnsureCreated();
+
+                    var seedData = services.GetRequiredService<SeedData>();
+                    seedData.InitializeAsync(services);
                 }
             }
 

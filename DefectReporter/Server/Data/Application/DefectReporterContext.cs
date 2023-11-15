@@ -35,6 +35,11 @@
         public DbSet<Comment> Comments { get; set; }
 
         /// <summary>
+        /// The db set of software builds.
+        /// </summary>
+        public DbSet<SoftwareBuild> SoftwareBuilds { get; set; }
+
+        /// <summary>
         /// The defect reporter context constructor.
         /// </summary>
         /// <param name="options">
@@ -57,18 +62,44 @@
             modelBuilder.Entity<Comment>()
                 .HasOne(p => p.Defect)
                 .WithMany(c => c.Comments)
-                .HasForeignKey(p => p.DefectId);
+                .HasForeignKey(p => p.DefectId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<ApplicationUser>()
-                .HasOne(e => e.Comment)
-                .WithOne(e => e.ApplicationUser)
-                .HasForeignKey<Comment>(e => e.UserId)
+            modelBuilder.Entity<Defect>()
+                .HasOne(d => d.Owner)
+                .WithMany(u => u.Defects)
+                .HasForeignKey(d => d.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Defect>()
+                .HasOne(d => d.CurrentUser)
+                .WithMany(u => u.CurrentUserDefects)
+                .HasForeignKey(d => d.CurrentUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Defect>()
+                .HasOne(d => d.Release)
+                .WithOne(r => r.Defect)
+                .HasForeignKey<Defect>(d => d.ReleaseId)
                 .IsRequired();
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Owner)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(c => c.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Feature>()
                 .HasOne(p => p.Release)
                 .WithMany(c => c.Features)
-                .HasForeignKey(p => p.ReleaseId);
+                .HasForeignKey(p => p.ReleaseId)
+                .IsRequired();
+
+            modelBuilder.Entity<SoftwareBuild>()
+                .HasOne(r => r.Release)
+                .WithMany(f => f.SoftwareBuilds)
+                .HasForeignKey(p => p.ReleaseId)
+                .IsRequired();
 
             modelBuilder.Entity<Release>().HasData(
                 new { Id = 1, Name = "Pre-Alpha" },

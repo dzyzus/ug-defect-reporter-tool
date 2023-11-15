@@ -30,14 +30,14 @@ namespace DefectReporter.Shared.Models.Application
         public int DefectId { get; set; }
 
         /// <summary>
-        /// The application user.
+        /// The comment owner.
         /// </summary>
-        [ForeignKey("UserId")]
-        public ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey("OwnerId")]
+        public ApplicationUser Owner { get; set; }
 
         /// <summary>
-        /// The user is - foreign key.
+        /// The comment owner id - foreign key.
         /// </summary>
-        public string UserId { get; set; }
+        public string? OwnerId { get; set; }
     }
 }
