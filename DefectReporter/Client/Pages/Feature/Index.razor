@@ -1,0 +1,50 @@
+﻿@page "/feature/index"
+
+@using DefectReporter.Shared.Models.Application
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IHttpClientFactory HttpClientFactory
+
+@if (features.Count != 0)
+{
+    <h3>Features list</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Release</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var feature in features)
+            {
+                <tr>
+                    <td>@feature.Title</td>
+                    <td>@feature.Release.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>Currently there is no features in database.</h3>    
+}
+
+@code {
+    List<Feature> features = new List<Feature>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            features = await client.GetFromJsonAsync<List<Feature>>("api/feature/getfeatures");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+}

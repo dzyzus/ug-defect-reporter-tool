@@ -2601,11 +2601,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+      "projectUniqueName": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\DefectReporter.Client.csproj",
+      "projectName": "DefectReporter.Client",
+      "projectPath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\DefectReporter.Client.csproj",
+      "packagesPath": "C:\\Users\\wrkmm\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\obj\\",
+=======
       "projectUniqueName": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Client\\DefectReporter.Client.csproj",
       "projectName": "DefectReporter.Client",
       "projectPath": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Client\\DefectReporter.Client.csproj",
       "packagesPath": "C:\\Users\\wrkmm\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Client\\obj\\",
+>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2627,8 +2635,13 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+<<<<<<< HEAD
+            "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Shared\\DefectReporter.Shared.csproj": {
+              "projectPath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Shared\\DefectReporter.Shared.csproj"
+=======
             "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Shared\\DefectReporter.Shared.csproj": {
               "projectPath": "C:\\Users\\wrkmm\\source\\DefectReporter\\DefectReporter\\Shared\\DefectReporter.Shared.csproj"
+>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
             }
           }
         }

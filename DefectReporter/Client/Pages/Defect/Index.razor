@@ -1,0 +1,54 @@
+﻿@page "/defect/index"
+
+@using DefectReporter.Shared.Models.Application
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IHttpClientFactory HttpClientFactory
+
+@if (defects.Count != 0)
+{
+    <h3>Lista defektów</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Wersja oprogramowania</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var defect in defects)
+            {
+                <tr>
+                    <td>@defect.Id</td>
+                    <td>@defect.Title</td>
+                    <td>@defect.Description</td>
+                    <td>@defect.SoftwareBuild</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>Currently there is no defects in database.</h3>    
+}
+
+@code {
+    List<Defect> defects = new List<Defect>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            defects = await client.GetFromJsonAsync<List<Defect>>("api/defect/getdefects");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+}

@@ -1,0 +1,62 @@
+﻿@page "/faq/"
+
+<PageTitle>FAQ</PageTitle>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Frequently Asked Questions (FAQ)</h1>
+
+    <div class="accordion" id="faqAccordion">
+        <div class="card" @onmouseover="() => ToggleCollapse(1)" @onmouseout="() => ToggleCollapse(1)">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-danger" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="@IsCollapsed(1)" aria-controls="collapseOne">
+                        1. What is the purpose of this application?
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqAccordion"
+                 style="@CollapseStyle(1)">
+                <div class="card-body">
+                    This application is designed to manage defects and features in a project. It helps users track and
+                    organize issues and enhancements, making collaboration and project management more efficient.
+                </div>
+            </div>
+        </div>
+        <div class="card" @onmouseover="() => ToggleCollapse(2)" @onmouseout="() => ToggleCollapse(2)">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-danger" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="@IsCollapsed(2)" aria-controls="collapseTwo">
+                        2. How can I navigate to the home page?
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion"
+                 style="@CollapseStyle(2)">
+                <div class="card-body">
+                    You can navigate to the home page by clicking on the "Home" link in the navigation bar.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<bool> isCollapsedList = new List<bool> { true, true };
+
+    private bool IsCollapsed(int index)
+    {
+        return isCollapsedList[index - 1];
+    }
+
+    private void ToggleCollapse(int index)
+    {
+        isCollapsedList[index - 1] = !isCollapsedList[index - 1];
+    }
+
+    private string CollapseStyle(int index)
+    {
+        return IsCollapsed(index) ? "display: none;" : "display: block;";
+    }
+}

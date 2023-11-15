@@ -1,0 +1,41 @@
+﻿@page "/management/releases/index"
+
+@using DefectReporter.Shared.Models.Application
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IHttpClientFactory HttpClientFactory
+
+@if (releases.Count != 0)
+{
+    <h3>Available releases</h3>
+
+    foreach (Release release in releases)
+    {
+        <ul>
+            <li>
+                @release.Name
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <h3>Currently there is no defects in database.</h3>
+}
+
+@code {
+    List<Release> releases = new List<Release>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/releases/getreleases");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+}

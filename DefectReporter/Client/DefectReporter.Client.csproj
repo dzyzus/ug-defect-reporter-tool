@@ -17,4 +17,11 @@
     <ProjectReference Include="..\Shared\DefectReporter.Shared.csproj" />
   </ItemGroup>
 
+<<<<<<< HEAD
+  <ItemGroup>
+    <Folder Include="Pages\Management\SoftwareBuilds\" />
+  </ItemGroup>
+
+=======
+>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
 </Project>
