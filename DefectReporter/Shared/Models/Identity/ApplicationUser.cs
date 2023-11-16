@@ -13,13 +13,5 @@
     /// </summary>
     public class ApplicationUser : IdentityUser
     {
-        [InverseProperty("Owner")]
-        public List<Defect> Defects { get; set; }
-
-        [InverseProperty("Owner")]
-        public List<Comment> Comments { get; set; }
-
-        [InverseProperty("CurrentUser")]
-        public List<Defect> CurrentUserDefects { get; set; }
     }
 }

@@ -1,7 +1,11 @@
 ﻿@page "/defect/create"
 
 @using DefectReporter.Shared.Models.Application
-@inject AuthenticationStateProvider AuthenticationStateProvider
+@using DefectReporter.Shared.Models.Identity
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
 @inject IHttpClientFactory HttpClientFactory
 
 <h3>Create Defect</h3>
@@ -9,6 +13,14 @@
 @if (message != null)
 {
     <p>@message</p>
+}
+else if (applicationUsers.Count == 0)
+{
+    <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+        <div class="spinner-border text-center" role="status" style="width: 5rem; height: 5rem;">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 }
 else
 {
@@ -55,6 +67,17 @@ else
             <InputCheckbox class="form-check-input" @bind-Value="defect.IsRegression" />
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">The user who take care on</label>
+            <InputSelect id="currentUser" class="form-control" @bind-Value="defect.CurrentUserId">
+                @foreach (var user in applicationUsers)
+                {
+                    <option value="@user.Id">@user.UserName</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => defect.CurrentUserId)" />
+        </div>
+
         <br>
         <button type="submit" class="btn btn-primary">Report defect</button>
     </EditForm>
@@ -65,10 +88,15 @@ else
     private string message;
     private List<Release> releases = new List<Release>();
     private List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
+    private List<ApplicationUser> applicationUsers = new List<ApplicationUser>();
+
+    @inject AuthenticationStateProvider GetAuthenticationStateAsync
 
     protected override async Task OnInitializedAsync()
     {
         var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
 
         defect.Description = 
         "Example of description\n1. Reproduction step\n\ta) Start the software\n\tb) Do action\n\tc) SW throws excepction <yours exception>\n2. Environment setup\n\ta) OS: Windows 11\n\tb) RAM: 16GB\n\tc) CPU: Intel I5 11400\n3. Regression\n\t- Yes, it was working on SW_x_x_x but issue occurs after <change>";
@@ -76,6 +104,7 @@ else
         try
         {
             releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+            applicationUsers = await client.GetFromJsonAsync<List<ApplicationUser>>("api/user/getusers");
 
             releases.Insert(index: 0, new Release
             {
@@ -83,7 +112,16 @@ else
                 Name = "None"
             });
 
+            applicationUsers.Insert(index: 0, new ApplicationUser
+            {
+                Id = "0",
+                UserName = "None"
+            });
+
             softwareBuilds = await client.GetFromJsonAsync<List<SoftwareBuild>>("api/management/getsoftwarebuilds");
+
+            defect.OwnerName = authstate.User.Identity.Name;
+            defect.OwnerId = applicationUsers.First(user => user.Email == defect.OwnerName).Id;
         }
         catch (Exception ex)
         {
@@ -112,6 +150,7 @@ else
     {
         var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
         defect.Created = DateTime.Now;
+        defect.CurrentuserName = applicationUsers.First(user => user.Id == defect.CurrentUserId).UserName;
 
         var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
 

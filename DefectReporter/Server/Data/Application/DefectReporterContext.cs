@@ -73,18 +73,6 @@
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Defect>()
-                .HasOne(d => d.Owner)
-                .WithMany(u => u.Defects)
-                .HasForeignKey(d => d.OwnerId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Defect>()
-                .HasOne(d => d.CurrentUser)
-                .WithMany(u => u.CurrentUserDefects)
-                .HasForeignKey(d => d.CurrentUserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Defect>()
                 .HasOne(d => d.Release)
                 .WithMany(r => r.Defects)
                 .HasForeignKey(d => d.ReleaseId)

@@ -37,14 +37,13 @@
         public int DefectId { get; set; }
 
         /// <summary>
-        /// The comment owner.
-        /// </summary>
-        [ForeignKey("OwnerId")]
-        public ApplicationUser Owner { get; set; }
-
-        /// <summary>
-        /// The comment owner id - foreign key.
+        /// The comment owner id.
         /// </summary>
         public string? OwnerId { get; set; }
+
+        /// <summary>
+        /// The comment owner name.
+        /// </summary>
+        public string? OwnerName { get; set; }
     }
 }

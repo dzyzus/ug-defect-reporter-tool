@@ -59,7 +59,7 @@
             {
                 _context.Features.Add(feature);
                 await _context.SaveChangesAsync();
-                return Ok("Defect created successfully!");
+                return Ok("Feature created successfully!\n You will be redirected to feature list in a few seconds...");
             }
 
             return BadRequest("Invalid feature data");

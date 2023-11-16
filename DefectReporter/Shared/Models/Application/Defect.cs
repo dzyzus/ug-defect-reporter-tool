@@ -38,26 +38,24 @@ namespace DefectReporter.Shared.Models.Application
         public List<Comment>? Comments { get; set; }
 
         /// <summary>
-        /// The defect owner.
-        /// </summary>
-        [ForeignKey("OwnerId")]
-        public ApplicationUser? Owner { get; set; }
-
-        /// <summary>
         /// The defect owner id.
         /// </summary>
         public string? OwnerId { get; set; }
 
         /// <summary>
-        /// The current user.
+        /// The defect owner name.
         /// </summary>
-        [ForeignKey("CurrentUserId")]
-        public ApplicationUser? CurrentUser { get; set; }
+        public string? OwnerName { get; set; }
 
         /// <summary>
         /// The current user id.
         /// </summary>
         public string? CurrentUserId { get; set; }
+
+        /// <summary>
+        /// The current user name.
+        /// </summary>
+        public string? CurrentuserName { get; set; }
 
         /// <summary>
         /// The release.
@@ -84,6 +82,11 @@ namespace DefectReporter.Shared.Models.Application
         /// The defect completed reason.
         /// </summary>
         public DefectCompletedReasonEnum? CompletedReason { get; set; }
+
+        /// <summary>
+        /// The fixed on version
+        /// </summary>
+        public string? FixedOnVersion { get; set; }
 
         /// <summary>
         /// The date time of created.
