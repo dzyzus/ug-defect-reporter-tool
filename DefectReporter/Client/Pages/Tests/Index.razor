@@ -1,0 +1,72 @@
+﻿@page "/test/index"
+
+@using DefectReporter.Shared.Models.Application
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IHttpClientFactory HttpClientFactory
+
+@if (tests.Count != 0)
+{
+    <h3 class="text-center">Tests list</h3>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Test name</th>
+                <th>Test case</th>
+                <th>Type of test</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var test in tests)
+            {
+                <tr>
+                    <td>@test.TestName</td>
+                    <td>
+                        <ul style="list-style-type: none">
+                            @foreach (var step in test.TestCase.Split('\n'))
+                            {
+                                <li>@step.Trim()</li>
+                            }
+                        </ul>
+                     </td>
+                    <td>@test.TypeOfTest</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" @onclick="() => EditTest(test.Id)">Edit</button>
+                        <button type="button" class="btn btn-danger" @onclick="() => DeleteTest(test.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>Currently there is no tests in database.</h3>
+}
+
+@code {
+    List<Test> tests = new List<Test>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            tests = await client.GetFromJsonAsync<List<Test>>("api/test/getTests");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private void EditTest(int testId)
+    {
+    }
+
+    private void DeleteTest(int testId)
+    {
+    }
+}

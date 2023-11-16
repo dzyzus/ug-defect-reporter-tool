@@ -1,0 +1,58 @@
+﻿@page "/management/releases/index"
+
+@using DefectReporter.Shared.Models.Application
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IHttpClientFactory HttpClientFactory
+
+@if (releases.Count != 0)
+{
+    <div class="card">
+        <div class="card-header">
+            <h3>Available Releases</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach (Release release in releases)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>@release.Name</span>
+                    <div class="btn-group" role="group" aria-label="Release Actions">
+                        <button type="button" class="btn btn-primary" @onclick="() => EditRelease(release.Id)">Edit</button>
+                        <button type="button" class="btn btn-danger" @onclick="() => DeleteRelease(release.Id)">Delete</button>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        <h3>Currently, there are no releases in the database.</h3>
+    </div>
+}
+
+@code {
+    List<Release> releases = new List<Release>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private void EditRelease(int releaseId)
+    {
+    }
+
+    private void DeleteRelease(int releaseId)
+    {
+    }
+}

@@ -1,6 +1,9 @@
 ﻿#region Usings
 
+using DefectReporter.Shared.Enums;
+using DefectReporter.Shared.Models.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #endregion
 
@@ -30,14 +33,77 @@ namespace DefectReporter.Shared.Models.Application
         public string Description { get; set; }
 
         /// <summary>
-        /// The software build.
-        /// </summary>
-        [Required]
-        public string SoftwareBuild { get; set; }
-
-        /// <summary>
         /// The comments.
         /// </summary>
-        public List<Comment> Comments { get; set; }
+        public List<Comment>? Comments { get; set; }
+
+        /// <summary>
+        /// The defect owner.
+        /// </summary>
+        [ForeignKey("OwnerId")]
+        public ApplicationUser? Owner { get; set; }
+
+        /// <summary>
+        /// The defect owner id.
+        /// </summary>
+        public string? OwnerId { get; set; }
+
+        /// <summary>
+        /// The current user.
+        /// </summary>
+        [ForeignKey("CurrentUserId")]
+        public ApplicationUser? CurrentUser { get; set; }
+
+        /// <summary>
+        /// The current user id.
+        /// </summary>
+        public string? CurrentUserId { get; set; }
+
+        /// <summary>
+        /// The release.
+        /// </summary>
+        [ForeignKey("ReleaseId")]
+        public Release? Release { get; set; }
+
+        /// <summary>
+        /// The release id.
+        /// </summary>
+        public int? ReleaseId { get; set; }
+
+        /// <summary>
+        /// The value which indicates regression
+        /// </summary>
+        public bool IsRegression { get; set; }
+
+        /// <summary>
+        /// The value which indicates defect is fixed.
+        /// </summary>
+        public bool? IsFixed { get; set; }
+
+        /// <summary>
+        /// The defect completed reason.
+        /// </summary>
+        public DefectCompletedReasonEnum? CompletedReason { get; set; }
+
+        /// <summary>
+        /// The date time of created.
+        /// </summary>
+        public DateTime Created { get; set; }
+
+        /// <summary>
+        /// The date time of end.
+        /// </summary>
+        public DateTime? End { get; set; }
+
+        /// <summary>
+        /// The software build.
+        /// </summary>
+        [ForeignKey("SoftwareId")]
+        public SoftwareBuild? SoftwareBuild { get; set; }
+
+        /// <summary>
+        /// The software id.
+        /// </summary>
+        public int? SoftwareId { get; set; }
     }
 }

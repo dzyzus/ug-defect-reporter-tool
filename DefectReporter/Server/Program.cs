@@ -6,6 +6,7 @@ namespace DefectReporter
     using DefectReporter.Server.Data.Identity;
     using DefectReporter.Shared.Models.Identity;
     using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     #endregion
@@ -21,12 +22,15 @@ namespace DefectReporter
 
             // Add services to the container.
             builder.Services.AddDbContext<IdentityDbContext>(options =>
-                options.UseSqlServer("DefectReporterUsersDb"));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-            
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefectReporterUsersDb")));
+
             builder.Services.AddDbContext<DefectReporterContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefectReporterAppDb")));
 
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                builder.Configuration.Bind("Local", options.ProviderOptions);
+            });
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<IdentityDbContext>();
@@ -37,8 +41,16 @@ namespace DefectReporter
             builder.Services.AddAuthentication()
                 .AddIdentityServerJwt();
 
+
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+
+            // Register HttpClient in DI
+            builder.Services.AddHttpClient();
+
+            builder.Services.AddControllers();
+
+            builder.Services.AddScoped<SeedData>();
 
             var app = builder.Build();
 
@@ -65,7 +77,6 @@ namespace DefectReporter
             app.UseIdentityServer();
             app.UseAuthorization();
 
-
             app.MapRazorPages();
             app.MapControllers();
             app.MapFallbackToFile("index.html");
@@ -81,6 +92,9 @@ namespace DefectReporter
                 {
                     dbContext.Database.EnsureCreated();
                     dbUserContext.Database.EnsureCreated();
+
+                    var seedData = services.GetRequiredService<SeedData>();
+                    seedData.InitializeAsync(services);
                 }
             }
 

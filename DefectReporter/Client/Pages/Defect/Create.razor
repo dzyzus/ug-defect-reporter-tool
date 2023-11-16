@@ -1,0 +1,127 @@
+﻿@page "/defect/create"
+
+@using DefectReporter.Shared.Models.Application
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IHttpClientFactory HttpClientFactory
+
+<h3>Create Defect</h3>
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else
+{
+    <EditForm Model="@defect" OnValidSubmit="CreateDefect">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Title</label>
+            <InputText @bind-Value="defect.Title" class="form-control" />
+            <ValidationMessage For="@(() => defect.Title)" />
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Description</label>
+            <InputTextArea @bind-Value="defect.Description" class="form-control" rows="11"></InputTextArea>
+            <ValidationMessage For="@(() => defect.Description)" />
+        </div>
+        
+        <div class="form-group">
+            <label for="release" class="col-sm-2 col-form-label">Release</label>
+            <InputSelect id="release" class="form-control" @bind-Value="defect.ReleaseId">
+                @foreach (var release in releases)
+                {
+                    <option value="@release.Id">@release.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => defect.ReleaseId)" />
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Software Build</label>
+            <InputSelect id="softwarebuild" class="form-control" @bind-Value="defect.SoftwareId">
+                @foreach (var software in GetFilteredSoftwareBuilds())
+                {
+                    <option value="@software.Id">@software.SoftwareVersion</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => defect.SoftwareId)" />
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Regression</label>
+            <br>
+            <InputCheckbox class="form-check-input" @bind-Value="defect.IsRegression" />
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-primary">Report defect</button>
+    </EditForm>
+}
+
+@code {
+    private Defect defect = new Defect();
+    private string message;
+    private List<Release> releases = new List<Release>();
+    private List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        defect.Description = 
+        "Example of description\n1. Reproduction step\n\ta) Start the software\n\tb) Do action\n\tc) SW throws excepction <yours exception>\n2. Environment setup\n\ta) OS: Windows 11\n\tb) RAM: 16GB\n\tc) CPU: Intel I5 11400\n3. Regression\n\t- Yes, it was working on SW_x_x_x but issue occurs after <change>";
+
+        try
+        {
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+
+            releases.Insert(index: 0, new Release
+            {
+                Id = 0,
+                Name = "None"
+            });
+
+            softwareBuilds = await client.GetFromJsonAsync<List<SoftwareBuild>>("api/management/getsoftwarebuilds");
+        }
+        catch (Exception ex)
+        {
+            message = "Error: " + ex.Message;
+        }
+    }
+
+    private List<SoftwareBuild> GetFilteredSoftwareBuilds()
+    {
+        if (defect.ReleaseId != null)
+        {
+            return softwareBuilds.Where(sw => sw.ReleaseId == defect.ReleaseId).ToList();
+        }
+        else
+        {
+            return new List<SoftwareBuild>() { new SoftwareBuild { Id = 1, SoftwareVersion = "None", ReleaseId = 0 } };
+        }
+    }
+
+    private void OnReleaseChange(ChangeEventArgs args)
+    {
+        StateHasChanged();
+    }
+
+    private async Task CreateDefect()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+        defect.Created = DateTime.Now;
+
+        var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
+
+        if (response.IsSuccessStatusCode)
+        {
+            message = await response.Content.ReadAsStringAsync();
+        }
+        else
+        {
+            message = "Failed to create defect.";
+        }
+    }
+}
