@@ -12,8 +12,10 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Description</th>
-                <th>Software build</th>
+                <th>Submitter</th>
+                <th>Component</th>
+                <th>Status</th>
+                <th>Created date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,8 +24,10 @@
             {
                 <tr>
                     <td>@defect.Title</td>
-                    <td>@defect.Description</td>
-                    <td>@defect.SoftwareBuild</td>
+                    <td>@defect.OwnerName</td>
+                    <td>@defect.Component</td>
+                    <td>@defect.Status</td>
+                    <td>@defect.Created.ToString("dd-mm-yyyy")</td>
                     <td>
                         <button type="button" class="btn btn-primary" @onclick="() => EditDefect(defect.Id)">Edit</button>
                         <button type="button" class="btn btn-danger" @onclick="() => DeleteDefect(defect.Id)">Delete</button>

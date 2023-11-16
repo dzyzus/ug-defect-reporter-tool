@@ -94,6 +94,16 @@ namespace DefectReporter.Shared.Models.Application
         public DateTime Created { get; set; }
 
         /// <summary>
+        /// The defect status.
+        /// </summary>
+        public DefectStatusEnum Status { get; set; }
+
+        /// <summary>
+        /// The component.
+        /// </summary>
+        public ComponentEnum Component { get; set; }
+
+        /// <summary>
         /// The date time of end.
         /// </summary>
         public DateTime? End { get; set; }

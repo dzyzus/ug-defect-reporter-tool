@@ -2,13 +2,15 @@
 
 @using DefectReporter.Shared.Models.Application
 @using DefectReporter.Shared.Models.Identity
+@using DefectReporter.Shared.Enums
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 @inject IHttpClientFactory HttpClientFactory
 
-<h3>Create Defect</h3>
+<h3 class="text-center">Defects</h3>
+<br />
 
 @if (message != null)
 {
@@ -60,7 +62,18 @@ else
             </InputSelect>
             <ValidationMessage For="@(() => defect.SoftwareId)" />
         </div>
-        
+
+        <div class="form-group">
+            <label for="Component">Component:</label>
+            <InputSelect id="Component" class="form-control" @bind-Value="defect.Component" required>
+                @foreach (var enumValue in Enum.GetValues(typeof(ComponentEnum)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => defect.Component)" />
+        </div>
+
         <div class="form-group">
             <label class="col-sm-2 col-form-label">Regression</label>
             <br>
@@ -150,6 +163,7 @@ else
     {
         var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
         defect.Created = DateTime.Now;
+        defect.Status = DefectStatusEnum.New;
         defect.CurrentuserName = applicationUsers.First(user => user.Id == defect.CurrentUserId).UserName;
 
         var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);

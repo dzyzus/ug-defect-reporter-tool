@@ -78,12 +78,6 @@
                 .HasForeignKey(d => d.ReleaseId)
                 .IsRequired();
 
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.Owner)
-                .WithMany(u => u.Comments)
-                .HasForeignKey(c => c.OwnerId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<Feature>()
                 .HasOne(p => p.Release)
                 .WithMany(c => c.Features)
