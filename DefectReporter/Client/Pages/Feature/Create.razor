@@ -5,9 +5,9 @@
 
 <h3>Add feature</h3>
 
-@if (successMessage != null)
+@if (message != null)
 {
-    <p>@successMessage</p>
+    <p>@message</p>
 }
 else
 {
@@ -15,7 +15,7 @@ else
 
 @code {
     private Feature feature = new Feature();
-    private string successMessage;
+    private string message;
 
     private async Task AddFeature()
     {
@@ -25,11 +25,11 @@ else
 
         if (response.IsSuccessStatusCode)
         {
-            successMessage = await response.Content.ReadAsStringAsync();
+            message = await response.Content.ReadAsStringAsync();
         }
         else
         {
-            successMessage = "Failed to add feature.";
+            message = "Failed to add feature.";
         }
     }
 }

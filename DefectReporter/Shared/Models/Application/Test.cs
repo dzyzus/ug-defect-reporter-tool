@@ -44,6 +44,12 @@
         public TypeOfTest TypeOfTest { get; set; }
 
         /// <summary>
+        /// The component.
+        /// </summary>
+        [Required]
+        public ComponentEnum Component { get; set; }
+
+        /// <summary>
         /// The feature.
         /// </summary>
         [ForeignKey("FeatureId")]

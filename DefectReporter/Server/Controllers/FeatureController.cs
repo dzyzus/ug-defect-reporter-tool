@@ -10,7 +10,7 @@
     #endregion
 
     /// <summary>
-    /// The test controller.
+    /// The feature controller.
     /// </summary>
     [Route("api/[controller]")]
     public class FeatureController : ControllerBase
@@ -88,6 +88,83 @@
             await _context.SaveChangesAsync();
 
             return Ok($"Feature with ID {featureId} deleted successfully");
+        }
+
+        /// <summary>
+        /// The get feature.
+        /// </summary>
+        /// <param name="featureId">
+        /// The ferature id.
+        /// </param>
+        /// <returns>
+        /// Returns the action status.
+        /// </returns>
+        [HttpGet("getFeature/{featureId}")]
+        public async Task<IActionResult> GetFeature(int featureId)
+        {
+            var feature = await _context.Features.FindAsync(featureId);
+
+            if (feature == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(feature);
+        }
+
+        /// <summary>
+        /// The update feature.
+        /// </summary>
+        /// <param name="featureId">
+        /// The feature id.
+        /// </param>
+        /// <param name="feature">
+        /// The feature model.
+        /// </param>
+        /// <returns>
+        /// Returns the action status.
+        /// </returns>
+        [HttpPut("updateFeature/{featureId}")]
+        public async Task<IActionResult> UpdateFeature(int featureId, [FromBody] Feature feature)
+        {
+            if (featureId != feature.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(feature).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FeatureExists(featureId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// The feature exists.
+        /// </summary>
+        /// <param name="featureId">
+        /// The feature id.
+        /// </param>
+        /// <returns>
+        /// Returns value which indicates the feature exists.
+        /// </returns>
+        private bool FeatureExists(int featureId)
+        {
+            return _context.Features.Any(e => e.Id == featureId);
         }
     }
 }

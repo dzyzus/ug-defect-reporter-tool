@@ -33,9 +33,15 @@
         </tbody>
     </table>
 }
+else if (defects == null)
+{
+    <div class="spinner-border text-center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+}
 else
 {
-    <h3>Currently there is no defects in database.</h3>    
+    <h3>Currently there is no defects in database.</h3>
 }
 
 @code {

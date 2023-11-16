@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxDcmVhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Feature/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Feature/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxJbmRleC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -52,8 +56,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlbWVudFxJbmRleC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Management/Releases/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlbWVudFxSZWxlYXNlc1xDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Management/Releases/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlbWVudFxSZWxlYXNlc1xFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Management/Releases/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlbWVudFxSZWxlYXNlc1xJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Management/SoftwareBuilds/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlbWVudFxTb2Z0d2FyZUJ1aWxkc1xDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Management/SoftwareBuilds/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlbWVudFxTb2Z0d2FyZUJ1aWxkc1xFZGl0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Management/SoftwareBuilds/Index.razor]

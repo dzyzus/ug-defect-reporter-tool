@@ -1,0 +1,57 @@
+﻿@page "/management/addrelease"
+
+@using DefectReporter.Shared.Models.Application
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager NavigationManager
+
+<h3>Add release</h3>
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else
+{
+    <EditForm Model="@release" OnValidSubmit="AddRelease">
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Release name</label>
+            <InputText @bind-Value="release.Name" class="form-control" required/>
+            <ValidationMessage For="@(() => release.Name)" />
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Add release</button>
+        <button type="button" class="btn btn-secondary" @onclick="GoBackToIndex">Back</button>
+    </EditForm>
+}
+
+@code {
+    private Release release = new Release();
+    private string message;
+
+    private void OnReleaseChange(ChangeEventArgs args)
+    {
+        StateHasChanged();
+    }
+
+    private async Task AddRelease()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        var response = await client.PostAsJsonAsync("/api/management/addrelease", release);
+
+        if (response.IsSuccessStatusCode)
+        {
+            message = await response.Content.ReadAsStringAsync();
+        }
+        else
+        {
+            message = "Failed to add release.";
+        }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/management/releases/index");
+    }
+}

@@ -28,7 +28,7 @@
         /// The release.
         /// </summary>
         [ForeignKey("ReleaseId")]
-        public Release Release { get; set; }
+        public Release? Release { get; set; }
 
         /// <summary>
         /// The release id.

@@ -1,0 +1,105 @@
+﻿@page "/management/updatesoftwarebuild/{softwareBuildId}"
+
+@using DefectReporter.Shared.Models.Application
+
+@inject NavigationManager NavigationManager
+@inject HttpClient HttpClient
+
+<h3>Edit release</h3>
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else if (softwareBuild != null)
+{
+    <EditForm Model="softwareBuild" OnValidSubmit="UpdateRelease">
+        <div class="form-group">
+            <label for="Name">Software version:</label>
+            <InputText id="Name" class="form-control" @bind-Value="softwareBuild.SoftwareVersion" required />
+            <ValidationMessage For="@(() => softwareBuild.SoftwareVersion)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Release">Release:</label>
+            <InputSelect id="Release" class="form-control" @bind-Value="softwareBuild.ReleaseId" required>
+                @foreach (var release in releases)
+                {
+                    <option value="@release.Id">@release.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => softwareBuild.ReleaseId)" />
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" @onclick="GoBackToIndex">Back</button>
+    </EditForm>
+}
+else
+{
+    <div class="spinner-border text-center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public string SoftwareBuildId { get; set; }
+
+    private SoftwareBuild softwareBuild;
+    private string message;
+    List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
+    List<Release> releases = new List<Release>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadSoftwareBuild();
+    }
+
+    @inject IHttpClientFactory HttpClientFactory
+
+    private async Task LoadSoftwareBuild()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+            softwareBuild = await client.GetFromJsonAsync<SoftwareBuild>($"api/management/getSoftwareBuild/{Convert.ToInt32(SoftwareBuildId)}");
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private async Task UpdateRelease()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            var response = await client.PutAsJsonAsync($"api/management/updateSoftwareBuild/{Convert.ToInt32(SoftwareBuildId)}", softwareBuild);
+
+            if (response.IsSuccessStatusCode)
+            {
+                GoBackToIndex();
+            }
+            else
+            {
+                LoadSoftwareBuild();
+                message = await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/management/softwarebuilds/index");
+    }
+}

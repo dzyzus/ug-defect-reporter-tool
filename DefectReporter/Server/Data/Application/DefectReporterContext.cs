@@ -169,7 +169,8 @@
                     TestCase = "1. Open the registration form\n2. Provide correct data\n3. Check the registration with correct data will be completed",
                     IsAutomated = true,
                     TypeOfTest = TypeOfTest.Functional,
-                    FeatureId = 2
+                    FeatureId = 2,
+                    Component = ComponentEnum.Authentication
                 },
                 new
                 {
@@ -178,7 +179,8 @@
                     TestCase = "1. Open the registration form\n2. Provide incorrect data\n3. Check the registration with incorrect data will be interrupted",
                     IsAutomated = true,
                     TypeOfTest = TypeOfTest.Security,
-                    FeatureId = 2
+                    FeatureId = 2,
+                    Component = ComponentEnum.Authentication
                 },
                 new
                 {
@@ -187,7 +189,8 @@
                     TestCase = "1. Open the login form\n2. Provide correct data\n3. Check the login proccess will be completed",
                     IsAutomated = true,
                     TypeOfTest = TypeOfTest.Functional,
-                    FeatureId = 1
+                    FeatureId = 1,
+                    Component = ComponentEnum.Authentication
                 },
                 new
                 {
@@ -196,7 +199,8 @@
                     TestCase = "1. Open the login form\n2. Provide incorrect data\n3. Check the login proccess will be interrupted",
                     IsAutomated = true,
                     TypeOfTest = TypeOfTest.Security,
-                    FeatureId = 1
+                    FeatureId = 1,
+                    Component = ComponentEnum.Authentication
                 },
                 new
                 {
@@ -205,7 +209,8 @@
                     TestCase = "1. Provide url\n2. Check the provided url will be opened properly",
                     IsAutomated = true,
                     TypeOfTest = TypeOfTest.Smoke,
-                    FeatureId = 1
+                    FeatureId = 1,
+                    Component = ComponentEnum.Authentication
                 },
                 new
                 {
@@ -214,7 +219,8 @@
                     TestCase = "1. Provide url\n2. Check the provided url will be opened properly",
                     IsAutomated = true,
                     TypeOfTest = TypeOfTest.Smoke,
-                    FeatureId = 2
+                    FeatureId = 2,
+                    Component = ComponentEnum.Authentication
                 },
                 new
                 {
@@ -223,9 +229,12 @@
                     TestCase = "1. Provide url\n2. Check the provided url will be opened properly",
                     IsAutomated = true,
                     TypeOfTest = TypeOfTest.Smoke,
-                    FeatureId = 3
+                    FeatureId = 3,
+                    Component = ComponentEnum.Feature
                 }
                 );
+
+            modelBuilder.Entity<Feature>().HasMany(f => f.Tests).WithOne(t => t.Feature).HasForeignKey(t => t.FeatureId);
         }
     }
 }

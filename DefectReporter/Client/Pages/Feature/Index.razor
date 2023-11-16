@@ -14,6 +14,7 @@
                 <th>Feature</th>
                 <th>Description</th>
                 <th>Component</th>
+                <th>Release</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                     <td>@feature.Title</td>
                     <td>@feature.Description</td>
                     <td>@feature.Component</td>
+                    <td>@releases.First(release => release.Id == feature.ReleaseId)?.Name</td>
                     <td>
                         <button type="button" class="btn btn-primary" @onclick="() => EditFeature(feature.Id)">Edit</button>
                         <button type="button" class="btn btn-danger" @onclick="() => DeleteFeature(feature.Id)">Delete</button>
@@ -33,13 +35,20 @@
         </tbody>
     </table>
 }
+else if (features == null)
+{
+    <div class="spinner-border text-center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+}
 else
 {
-    <h3>Currently there is no features in database.</h3>    
+    <h3>Currently there is no features in database.</h3>
 }
 
 @code {
     List<Feature> features = new List<Feature>();
+    List<Release> releases = new List<Release>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -48,6 +57,7 @@ else
         try
         {
             features = await client.GetFromJsonAsync<List<Feature>>("api/feature/getFeatures");
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -55,8 +65,11 @@ else
         }
     }
 
+    @inject NavigationManager NavigationManager
+
     private void EditFeature(int featureId)
     {
+        NavigationManager.NavigateTo($"/feature/updatefeature/{featureId}");
     }
 
     @inject IJSRuntime JS
