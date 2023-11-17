@@ -2,6 +2,7 @@
 
 @using DefectReporter.Shared.Models.Application
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
 @inject IHttpClientFactory HttpClientFactory
 
 @if (defects.Count != 0)
@@ -23,7 +24,11 @@
             @foreach (var defect in defects)
             {
                 <tr>
-                    <td>@defect.Title</td>
+                    <td colspan="5">
+                        <NavLink href=@($"defect/details/{defect.Id}")>
+                            @defect.Title
+                        </NavLink>
+                    </td>
                     <td>@defect.OwnerName</td>
                     <td>@defect.Component</td>
                     <td>@defect.Status</td>
