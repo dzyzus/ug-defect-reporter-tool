@@ -45,6 +45,21 @@
         }
 
         /// <summary>
+        /// The get defect details.
+        /// </summary>
+        /// <param name="defectId">
+        /// The defect id.
+        /// </param>
+        /// <returns>
+        /// Return the defect model.
+        /// </returns>
+        [HttpGet("getDefectDetails/{defectId}")]
+        public async Task<Defect> GetDefectDetails(int defectId)
+        {
+            return await _context.Defects.Where(defect => defect.Id == defectId).FirstOrDefaultAsync();
+        }
+
+        /// <summary>
         /// The create defect.
         /// </summary>
         /// <param name="defect">

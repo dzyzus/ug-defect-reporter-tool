@@ -1,5 +1,208 @@
-﻿@page "/defect/details/{featureId}"
+﻿@page "/defect/getdefectdetails/{defectid}"
+@using DefectReporter.Shared.Models.Application
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
+@inject IHttpClientFactory HttpClientFactory
+
+<div class="container-fluid mt-4">
+    <h3>Defect Details</h3>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Title:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.Title</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Description:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.Description</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Owner:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.OwnerName</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Release:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@releaseName</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Is Regression:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.IsRegression</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Is Fixed:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.IsFixed</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Completed Reason:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.CompletedReason</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Fixed On Version:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.FixedOnVersion</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Created:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.Created</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Status:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.Status</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Component:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.Component</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>End:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@defect.End</p>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <div class="col-md-3">
+                    <p class="card-text"><strong>Software Build:</strong></p>
+                </div>
+                <div class="col-md-9">
+                    <p class="card-text">@softwareBuild</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-4">Comments</h4>
+    @if (defect.Comments != null && defect.Comments.Any())
+    {
+        @foreach (var comment in defect.Comments)
+        {
+            <div class="card mt-3">
+                <div class="card-body">
+                    <p class="card-text"><strong>@comment.OwnerName:</strong></p>
+                    <p class="card-text">@comment.Content</p>
+                    <p class="card-text"><em>Posted on @comment.CreateDate</em></p>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No comments yet.</p>
+    }
+
+    <h4 class="mt-4">Add Comment</h4>
+    <div class="card">
+        <div class="card-body">
+            <textarea class="form-control mb-2" @bind="NewComment" placeholder="Type your comment here"></textarea>
+            <button class="btn btn-primary" @onclick="AddComment">Add Comment</button>
+        </div>
+    </div>
+</div>
 @code {
+    [Parameter]
+    public string DefectId { get; set; }
+    private string message;
+    private string NewComment { get; set; }
+    private string softwareBuild { get; set; }
+    private string releaseName { get; set; }
 
+    List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
+    List<Release> releases = new List<Release>();
+    Defect defect;
+
+    /// <summary>
+    /// The on initlizaed async.
+    /// </summary>
+    /// <returns>
+    /// Returns the defects list.
+    /// </returns>
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDefect();
+    }
+
+    @inject IHttpClientFactory HttpClientFactory
+
+    private async Task LoadDefect()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+            softwareBuilds = await client.GetFromJsonAsync<List<SoftwareBuild>>("api/management/getsoftwarebuilds");
+            defect = await client.GetFromJsonAsync<Defect>($"api/defect/getdefectdetails/{Convert.ToInt32(DefectId)}");
+            releaseName = releases.Where(release => release.Id == defect.ReleaseId).FirstOrDefault().Name;
+            softwareBuild = softwareBuilds.Where(sw => sw.Id == defect.SoftwareId).FirstOrDefault().SoftwareVersion;
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private async Task AddComment()
+    {
+        // Implement logic to add a new comment for the current defect
+        // Example: await defectService.AddComment(Defect.Id, NewComment);
+        // After adding the comment, refresh the defect details to display the updated comments.
+        NewComment = string.Empty;
+    }
 }

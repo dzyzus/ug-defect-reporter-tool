@@ -26,6 +26,12 @@
         public string Content { get; set; }
 
         /// <summary>
+        /// The date time of create date.
+        /// </summary>
+        [Required]
+        public DateTime CreateDate { get; set; }
+
+        /// <summary>
         /// The defect.
         /// </summary>
         [ForeignKey("DefectId")]

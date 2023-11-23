@@ -24,16 +24,13 @@
             @foreach (var defect in defects)
             {
                 <tr>
-                    <td colspan="5">
-                        <NavLink href=@($"defect/details/{defect.Id}")>
-                            @defect.Title
-                        </NavLink>
-                    </td>
+                    <td>@defect.Title</td>
                     <td>@defect.OwnerName</td>
                     <td>@defect.Component</td>
                     <td>@defect.Status</td>
                     <td>@defect.Created.ToString("dd-mm-yyyy")</td>
                     <td>
+                        <button type="button" class="btn btn-primary" @onclick="() => GetDefectDetails(defect.Id)">Details</button>
                         <button type="button" class="btn btn-primary" @onclick="() => EditDefect(defect.Id)">Edit</button>
                         <button type="button" class="btn btn-danger" @onclick="() => DeleteDefect(defect.Id)">Delete</button>
                     </td>
@@ -78,20 +75,6 @@ else
 
     @inject IJSRuntime JS
 
-    /// <summary>
-    /// The edit defect action.
-    /// </summary>
-    /// <param name="defectId">
-    /// The defect id.   
-    /// </param>
-    /// <returns>
-    /// The defect edit action. 
-    /// </returns>
-    private async Task EditDefect(int defectId)
-    {
-        
-    }
-
     private async Task DeleteDefect(int defectId)
     {
         bool confirm = await JS.InvokeAsync<bool>("confirm", "Are you sure you want to delete this defect?");
@@ -111,6 +94,27 @@ else
                 var errorMessage = await response.Content.ReadAsStringAsync();
             }
         }
+    }
+
+    @inject NavigationManager NavigationManager
+
+    private void GetDefectDetails(int defectId)
+    {
+        NavigationManager.NavigateTo($"/defect/getdefectdetails/{defectId}");
+    }
+
+    /// <summary>
+    /// The edit defect action.
+    /// </summary>
+    /// <param name="defectId">
+    /// The defect id.
+    /// </param>
+    /// <returns>
+    /// The defect edit action.
+    /// </returns>
+    private async Task EditDefect(int defectId)
+    {
+        NavigationManager.NavigateTo($"/defect/updatedefect/{defectId}");
     }
 
     private async Task LoadDefects()
