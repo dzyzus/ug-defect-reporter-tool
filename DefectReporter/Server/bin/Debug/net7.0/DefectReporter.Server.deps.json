@@ -676,6 +676,14 @@
           }
         }
       },
+      "Markdig/0.33.0": {
+        "runtime": {
+          "lib/net6.0/Markdig.dll": {
+            "assemblyVersion": "0.33.0.0",
+            "fileVersion": "0.33.0.0"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.DataProtection": "2.2.0",
@@ -3169,6 +3177,7 @@
       "DefectReporter.Client/1.0.0": {
         "dependencies": {
           "DefectReporter.Shared": "1.0.0",
+          "Markdig": "0.33.0",
           "Microsoft.AspNetCore.Components.WebAssembly": "7.0.2",
           "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "7.0.2",
           "Microsoft.Extensions.Http": "7.0.0"
@@ -3606,6 +3615,13 @@
       "sha512": "sha512-eVHCR7a6m/dm5RFcBzE3qs/Jg5j9R5Rjpu8aTOv9e4AFvaQtBXb5ah7kmwU+YwA0ufRwz4wf1hnIvsD2hSnI4g==",
       "path": "identitymodel/6.0.0",
       "hashPath": "identitymodel.6.0.0.nupkg.sha512"
+    },
+    "Markdig/0.33.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wwjLxuVZyzOUpQkwMnP2eVOgCZzjHqSNsTOWxLQ1S9J5UIk43vsrgwyUBg1x7AX1MlxWH65Uyfsojm4LBwN6iw==",
+      "path": "markdig/0.33.0",
+      "hashPath": "markdig.0.33.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
       "type": "package",

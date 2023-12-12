@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "/4gtR9dwrckRMFZnDGbut2D3+9+4rj45idc93gJhagpq0QV1w5E14rvQpAm9eSB0wDoIoYMLFlYATHUf3Jm0PQ==",
+  "dgSpecHash": "uGmM61Zi3DB4IWkzUCTxn9GTbV0m/L6CTou6YWJJS+yr1C9YavH3SO65JYsyP9hyismujwAIcfJCyHeYpiJGfw==",
   "success": true,
   "projectFilePath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\DefectReporter.Client.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\wrkmm\\.nuget\\packages\\markdig\\0.33.0\\markdig.0.33.0.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

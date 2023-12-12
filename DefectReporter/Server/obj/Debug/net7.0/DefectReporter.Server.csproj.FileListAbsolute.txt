@@ -715,3 +715,4 @@ C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Ser
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.pdb
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.genruntimeconfig.cache
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\ref\DefectReporter.Server.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\bin\Debug\net7.0\Markdig.dll

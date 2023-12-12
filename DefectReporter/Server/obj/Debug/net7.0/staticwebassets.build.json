@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NCySQtNIW4pIWE9RvXjhsCCuFfm69TUjH0ST+OvY/Z4=",
+  "Hash": "M0XJ0KmoXaitnYOQVBpw8A7uyfU4/10am/R0vAsZDws=",
   "Source": "DefectReporter.Server",
   "BasePath": "_content/DefectReporter.Server",
   "Mode": "Default",
@@ -1285,6 +1285,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\7.0.2\\runtimes\\browser-wasm\\native\\icudt_no_CJK.dat"
+    },
+    {
+      "Identity": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Markdig.dll",
+      "SourceId": "DefectReporter.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Markdig.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\wrkmm\\.nuget\\packages\\markdig\\0.33.0\\lib\\net6.0\\Markdig.dll"
     },
     {
       "Identity": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Antiforgery.dll",
@@ -8289,6 +8306,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Reflection.Metadata.dll"
+    },
+    {
+      "Identity": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\obj\\Debug\\net7.0\\build-gz\\lU+UeKAI.gz",
+      "SourceId": "DefectReporter.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Markdig.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Markdig.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Markdig.dll"
     },
     {
       "Identity": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\obj\\Debug\\net7.0\\build-gz\\LweAHNem.gz",

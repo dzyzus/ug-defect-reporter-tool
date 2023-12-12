@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qKvyb9KJruGhigBxdrZd1MQ3apQG7iazM7Kho7tzjYS7FLRPImW/KkpKQjtVRapy+ESggYr8a22Ql0jr+Fr+zg==",
+  "dgSpecHash": "8kHaA9UocTtGaMsNK7aU7qetg2SH6IRsks3Jgu/TnBGdFuGACr5rBHcPx9wD2af5EqEqtIRren0JeasZrYbK0Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Server\\DefectReporter.Server.csproj",
   "expectedPackageFiles": [
@@ -63,6 +63,7 @@
     "C:\\Users\\wrkmm\\.nuget\\packages\\humanizer.core.zh-hans\\2.14.1\\humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\humanizer.core.zh-hant\\2.14.1\\humanizer.core.zh-hant.2.14.1.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\identitymodel\\6.0.0\\identitymodel.6.0.0.nupkg.sha512",
+    "C:\\Users\\wrkmm\\.nuget\\packages\\markdig\\0.33.0\\markdig.0.33.0.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.apiauthorization.identityserver\\7.0.2\\microsoft.aspnetcore.apiauthorization.identityserver.7.0.2.nupkg.sha512",
     "C:\\Users\\wrkmm\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

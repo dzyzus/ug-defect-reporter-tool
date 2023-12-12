@@ -69,5 +69,30 @@
 
             return BadRequest("Invalid comment data");
         }
+
+        /// <summary>
+        /// The delecte action.
+        /// </summary>
+        /// <param name="defectId">
+        /// The defect id.
+        /// </param>
+        /// <returns>
+        /// Returns action status.
+        /// </returns>
+        [HttpDelete("deleteComment/{commentId}")]
+        public async Task<IActionResult> DeleteComment(int commentId)
+        {
+            var comment = await _context.Comments.FindAsync(commentId);
+
+            if (comment == null)
+            {
+                return NotFound($"Comment with ID {commentId} not found");
+            }
+
+            _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+
+            return Ok($"Comment with ID {commentId} deleted successfully");
+        }
     }
 }

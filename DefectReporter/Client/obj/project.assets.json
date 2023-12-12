@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "Markdig/0.33.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Markdig.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Markdig.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -3211,6 +3224,19 @@
       }
     },
     "net7.0/browser-wasm": {
+      "Markdig/0.33.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Markdig.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Markdig.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -6387,6 +6413,27 @@
     }
   },
   "libraries": {
+    "Markdig/0.33.0": {
+      "sha512": "wwjLxuVZyzOUpQkwMnP2eVOgCZzjHqSNsTOWxLQ1S9J5UIk43vsrgwyUBg1x7AX1MlxWH65Uyfsojm4LBwN6iw==",
+      "type": "package",
+      "path": "markdig/0.33.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net462/Markdig.dll",
+        "lib/net462/Markdig.xml",
+        "lib/net6.0/Markdig.dll",
+        "lib/net6.0/Markdig.xml",
+        "lib/netstandard2.0/Markdig.dll",
+        "lib/netstandard2.0/Markdig.xml",
+        "lib/netstandard2.1/Markdig.dll",
+        "lib/netstandard2.1/Markdig.xml",
+        "markdig.0.33.0.nupkg.sha512",
+        "markdig.nuspec",
+        "markdig.png",
+        "readme.md"
+      ]
+    },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
       "sha512": "fVQsSXNZz38Ysx8iKwwqfOLHhLrAeKEMBS5Ia3Lh7BJjOC2vPV28/yk08AovOMsB3SNQPGnE7bv+lsIBTmAkvw==",
       "type": "package",
@@ -12754,6 +12801,7 @@
   "projectFileDependencyGroups": {
     "net7.0": [
       "DefectReporter.Shared >= 1.0.0",
+      "Markdig >= 0.33.0",
       "Microsoft.AspNetCore.Components.WebAssembly >= 7.0.2",
       "Microsoft.AspNetCore.Components.WebAssembly.Authentication >= 7.0.2",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 7.0.2",
@@ -12809,6 +12857,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "Markdig": {
+            "target": "Package",
+            "version": "[0.33.0, )"
+          },
           "Microsoft.AspNetCore.Components.WebAssembly": {
             "target": "Package",
             "version": "[7.0.2, )"

@@ -90,17 +90,17 @@
         /// <returns>
         /// Returns action status.
         /// </returns>
-        [HttpDelete("deleteFeature/{defectId}")]
+        [HttpDelete("deleteDefect/{defectId}")]
         public async Task<IActionResult> DeleteDefect(int defectId)
         {
-            var feature = await _context.Features.FindAsync(defectId);
+            var defect = await _context.Defects.FindAsync(defectId);
 
-            if (feature == null)
+            if (defect == null)
             {
                 return NotFound($"Defect with ID {defectId} not found");
             }
 
-            _context.Features.Remove(feature);
+            _context.Defects.Remove(defect);
             await _context.SaveChangesAsync();
 
             return Ok($"Defect with ID {defectId} deleted successfully");

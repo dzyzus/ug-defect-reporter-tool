@@ -3038,3 +3038,7 @@ C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Cli
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Client\obj\Debug\net7.0\refint\DefectReporter.Client.dll
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Client\obj\Debug\net7.0\DefectReporter.Client.pdb
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Client\obj\Debug\net7.0\ref\DefectReporter.Client.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Client\bin\Debug\net7.0\wwwroot\_framework\Markdig.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Client\bin\Debug\net7.0\wwwroot\_framework\Markdig.dll.gz
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Client\bin\Debug\net7.0\Markdig.dll
+C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Client\obj\Debug\net7.0\build-gz\lU+UeKAI.gz
