@@ -1,15 +1,28 @@
 ﻿@page "/defect/create"
 
 @using DefectReporter.Shared.Models.Application
+@using DefectReporter.Shared.Models.Identity
+@using DefectReporter.Shared.Enums
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
-@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IHttpClientFactory HttpClientFactory
 
-<h3>Create Defect</h3>
+<h3 class="text-center">Defects</h3>
+<br />
 
 @if (message != null)
 {
     <p>@message</p>
+}
+else if (applicationUsers.Count == 0)
+{
+    <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+        <div class="spinner-border text-center" role="status" style="width: 5rem; height: 5rem;">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 }
 else
 {
@@ -24,18 +37,12 @@ else
 
         <div class="form-group">
             <label class="col-sm-2 col-form-label">Description</label>
-            <InputTextArea @bind-Value="defect.Description" class="form-control"></InputTextArea>
+            <InputTextArea @bind-Value="defect.Description" class="form-control" rows="11"></InputTextArea>
             <ValidationMessage For="@(() => defect.Description)" />
         </div>
-
+        
         <div class="form-group">
-            <label class="col-sm-2 col-form-label">Software Build</label>
-            <InputText @bind-Value="defect.SoftwareBuild" class="form-control" />
-            <ValidationMessage For="@(() => defect.SoftwareBuild)" />
-        </div>
-
-        <div class="form-group">
-            <label for="release" class="col-sm-2 col-form-label"></label>
+            <label for="release" class="col-sm-2 col-form-label">Release</label>
             <InputSelect id="release" class="form-control" @bind-Value="defect.ReleaseId">
                 @foreach (var release in releases)
                 {
@@ -45,8 +52,47 @@ else
             <ValidationMessage For="@(() => defect.ReleaseId)" />
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Software Build</label>
+            <InputSelect id="softwarebuild" class="form-control" @bind-Value="defect.SoftwareId">
+                @foreach (var software in GetFilteredSoftwareBuilds())
+                {
+                    <option value="@software.Id">@software.SoftwareVersion</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => defect.SoftwareId)" />
+        </div>
+
+        <div class="form-group">
+            <label for="Component">Component:</label>
+            <InputSelect id="Component" class="form-control" @bind-Value="defect.Component" required>
+                @foreach (var enumValue in Enum.GetValues(typeof(ComponentEnum)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => defect.Component)" />
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Regression</label>
+            <br>
+            <InputCheckbox class="form-check-input" @bind-Value="defect.IsRegression" />
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">The user who take care on</label>
+            <InputSelect id="currentUser" class="form-control" @bind-Value="defect.CurrentUserId">
+                @foreach (var user in applicationUsers)
+                {
+                    <option value="@user.Id">@user.UserName</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => defect.CurrentUserId)" />
+        </div>
+
         <br>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Report defect</button>
     </EditForm>
 }
 
@@ -54,14 +100,41 @@ else
     private Defect defect = new Defect();
     private string message;
     private List<Release> releases = new List<Release>();
+    private List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
+    private List<ApplicationUser> applicationUsers = new List<ApplicationUser>();
+
+    @inject AuthenticationStateProvider GetAuthenticationStateAsync
 
     protected override async Task OnInitializedAsync()
     {
         var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
 
+        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+
+        defect.Description = 
+        "Example of description\n1. Reproduction step\n\t1.1. Start the software\n\t1.2. Do action\n\t1.3. SW throws excepction <yours exception>\n2. Environment setup\n\t2.1. OS: Windows 11\n\t2.2. RAM: 16GB\n\t2.3. CPU: Intel I5 11400\n3. Regression\n\t- Yes, it was working on SW_x_x_x but issue occurs after <change>";
+
         try
         {
-            releases = await client.GetFromJsonAsync<List<Release>>("api/defect/getreleases");
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+            applicationUsers = await client.GetFromJsonAsync<List<ApplicationUser>>("api/user/getusers");
+
+            releases.Insert(index: 0, new Release
+            {
+                Id = 0,
+                Name = "None"
+            });
+
+            applicationUsers.Insert(index: 0, new ApplicationUser
+            {
+                Id = "0",
+                UserName = "None"
+            });
+
+            softwareBuilds = await client.GetFromJsonAsync<List<SoftwareBuild>>("api/management/getsoftwarebuilds");
+
+            defect.OwnerName = authstate.User.Identity.Name;
+            defect.OwnerId = applicationUsers.First(user => user.Email == defect.OwnerName).Id;
         }
         catch (Exception ex)
         {
@@ -69,10 +142,30 @@ else
         }
     }
 
+    private List<SoftwareBuild> GetFilteredSoftwareBuilds()
+    {
+        if (defect.ReleaseId != null)
+        {
+            return softwareBuilds.Where(sw => sw.ReleaseId == defect.ReleaseId).ToList();
+        }
+        else
+        {
+            return new List<SoftwareBuild>() { new SoftwareBuild { Id = 1, SoftwareVersion = "None", ReleaseId = 0 } };
+        }
+    }
+
+    private void OnReleaseChange(ChangeEventArgs args)
+    {
+        StateHasChanged();
+    }
+
     private async Task CreateDefect()
     {
         var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
-
+        defect.Created = DateTime.Now;
+        defect.Status = DefectStatusEnum.New;
+        defect.CurrentuserName = applicationUsers.First(user => user.Id == defect.CurrentUserId).UserName;
+        defect.CompletedReason = DefectCompletedReasonEnum.InProgress;
 
         var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
 

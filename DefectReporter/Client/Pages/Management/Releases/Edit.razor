@@ -1,0 +1,92 @@
+﻿@page "/management/updaterelease/{releaseId}"
+
+@using DefectReporter.Shared.Models.Application
+
+@inject NavigationManager NavigationManager
+@inject HttpClient HttpClient
+
+<h3>Edit release</h3>
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else if (release != null)
+{
+    <EditForm Model="release" OnValidSubmit="UpdateRelease">
+        <div class="form-group">
+            <label for="Name">Release name:</label>
+            <InputText id="Name" class="form-control" @bind-Value="release.Name" required />
+            <ValidationMessage For="@(() => release.Name)" />
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" @onclick="GoBackToIndex">Back</button>
+    </EditForm>
+}
+else
+{
+    <div class="spinner-border text-center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public string ReleaseId { get; set; }
+
+    private Release release;
+    private string message;
+    List<Release> releases = new List<Release>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadRelease();
+    }
+
+    @inject IHttpClientFactory HttpClientFactory
+
+    private async Task LoadRelease()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            release = await client.GetFromJsonAsync<Release>($"api/management/getRelease/{Convert.ToInt32(ReleaseId)}");
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private async Task UpdateRelease()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            var response = await client.PutAsJsonAsync($"api/management/updateRelease/{Convert.ToInt32(ReleaseId)}", release);
+
+            if (response.IsSuccessStatusCode)
+            {
+                GoBackToIndex();
+            }
+            else
+            {
+                LoadRelease();
+                message = await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/management/releases/index");
+    }
+}

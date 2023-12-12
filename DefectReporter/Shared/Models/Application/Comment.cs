@@ -1,9 +1,16 @@
-﻿using DefectReporter.Shared.Models.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DefectReporter.Shared.Models.Application
+﻿namespace DefectReporter.Shared.Models.Application
 {
+    #region Usings
+
+    using DefectReporter.Shared.Models.Identity;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    #endregion
+
+    /// <summary>
+    /// The comment.
+    /// </summary>
     public class Comment
     {
         /// <summary>
@@ -19,10 +26,16 @@ namespace DefectReporter.Shared.Models.Application
         public string Content { get; set; }
 
         /// <summary>
+        /// The date time of create date.
+        /// </summary>
+        [Required]
+        public DateTime CreateDate { get; set; }
+
+        /// <summary>
         /// The defect.
         /// </summary>
         [ForeignKey("DefectId")]
-        public Defect Defect { get; set; }
+        public Defect? Defect { get; set; }
 
         /// <summary>
         /// The defect id.
@@ -30,14 +43,13 @@ namespace DefectReporter.Shared.Models.Application
         public int DefectId { get; set; }
 
         /// <summary>
-        /// The comment owner.
-        /// </summary>
-        [ForeignKey("OwnerId")]
-        public ApplicationUser Owner { get; set; }
-
-        /// <summary>
-        /// The comment owner id - foreign key.
+        /// The comment owner id.
         /// </summary>
         public string? OwnerId { get; set; }
+
+        /// <summary>
+        /// The comment owner name.
+        /// </summary>
+        public string? OwnerName { get; set; }
     }
 }

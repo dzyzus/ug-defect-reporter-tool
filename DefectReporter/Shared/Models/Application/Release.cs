@@ -28,16 +28,16 @@
         /// <summary>
         /// The features.
         /// </summary>
-        public List<Feature> Features { get; set; }
+        public List<Feature>? Features { get; set; }
 
         /// <summary>
         /// The software builds.
         /// </summary>
-        public List<SoftwareBuild> SoftwareBuilds { get; set; }
+        public List<SoftwareBuild>? SoftwareBuilds { get; set; }
 
         /// <summary>
         /// The defect.
         /// </summary>
-        public Defect? Defect { get; set; }
+        public List<Defect>? Defects { get; set; }
     }
 }

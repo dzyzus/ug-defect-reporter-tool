@@ -11,13 +11,9 @@
 using System;
 using System.Reflection;
 
-<<<<<<<< HEAD:DefectReporter/Server/obj/Release/net7.0/DefectReporter.Server.RazorAssemblyInfo.cs
-[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ProvideApplicationPartFactoryAttribute("Microsoft.AspNetCore.Mvc.ApplicationParts.ConsolidatedAssemblyApplicationPartFact" +
-    "ory, Microsoft.AspNetCore.Mvc.Razor")]
-========
+[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("DefectReporter.Client")]
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Microsoft.AspNetCore.ApiAuthorization.IdentityServer")]
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Microsoft.AspNetCore.Identity.UI")]
->>>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d:DefectReporter/Server/obj/Debug/net7.0/DefectReporter.Server.MvcApplicationPartsAssemblyInfo.cs
 
 // Wygenerowane przez klasę WriteCodeFragment programu MSBuild.
 

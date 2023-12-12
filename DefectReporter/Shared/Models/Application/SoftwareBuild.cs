@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DefectReporter.Shared.Models.Application
+﻿namespace DefectReporter.Shared.Models.Application
 {
+    #region Usings
+
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    #endregion
+
+    /// <summary>
+    /// The software build.
+    /// </summary>
     public class SoftwareBuild
     {
         /// <summary>
@@ -20,17 +22,22 @@ namespace DefectReporter.Shared.Models.Application
         /// The version.
         /// </summary>
         [Required]
-        public string Version { get; set; }
+        public string SoftwareVersion { get; set; }
 
         /// <summary>
         /// The release.
         /// </summary>
         [ForeignKey("ReleaseId")]
-        public Release Release { get; set; }
+        public Release? Release { get; set; }
 
         /// <summary>
         /// The release id.
         /// </summary>
         public int ReleaseId { get; set; }
+
+        /// <summary>
+        /// The defect.
+        /// </summary>
+        public Defect? Defect { get; set; }
     }
 }

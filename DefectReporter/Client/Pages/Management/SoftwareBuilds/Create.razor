@@ -1,0 +1,84 @@
+﻿@page "/management/addsoftwarebuild"
+
+@using DefectReporter.Shared.Models.Application
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager NavigationManager
+
+<h3>Add software build</h3>
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else
+{
+    <EditForm Model="@softwareBuild" OnValidSubmit="AddSoftwareBuild">
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Software version</label>
+            <InputText @bind-Value="softwareBuild.SoftwareVersion" class="form-control" required/>
+            <ValidationMessage For="@(() => softwareBuild.SoftwareVersion)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Release">Release:</label>
+            <InputSelect id="Release" class="form-control" @bind-Value="softwareBuild.ReleaseId" required>
+                @foreach (var release in releases)
+                {
+                    <option value="@release.Id">@release.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => softwareBuild.ReleaseId)" />
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Add software build</button>
+        <button type="button" class="btn btn-secondary" @onclick="GoBackToIndex">Back</button>
+    </EditForm>
+}
+
+@code {
+    private SoftwareBuild softwareBuild = new SoftwareBuild();
+    private string message;
+
+    List<Release> releases = new List<Release>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private void OnReleaseChange(ChangeEventArgs args)
+    {
+        StateHasChanged();
+    }
+
+    private async Task AddSoftwareBuild()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        var response = await client.PostAsJsonAsync("/api/management/addsoftwarebuild", softwareBuild);
+
+        if (response.IsSuccessStatusCode)
+        {
+            message = await response.Content.ReadAsStringAsync();
+        }
+        else
+        {
+            message = "Failed to create defect.";
+        }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/management/softwarebuilds/index");
+    }
+}

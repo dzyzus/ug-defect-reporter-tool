@@ -1,12 +1,9 @@
 ﻿#region Usings
 
-<<<<<<< HEAD
+using DefectReporter.Shared.Enums;
 using DefectReporter.Shared.Models.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-=======
-using System.ComponentModel.DataAnnotations;
->>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
 
 #endregion
 
@@ -36,22 +33,9 @@ namespace DefectReporter.Shared.Models.Application
         public string Description { get; set; }
 
         /// <summary>
-        /// The software build.
-        /// </summary>
-        [Required]
-        public string SoftwareBuild { get; set; }
-
-        /// <summary>
         /// The comments.
         /// </summary>
-<<<<<<< HEAD
         public List<Comment>? Comments { get; set; }
-
-        /// <summary>
-        /// The defect owner.
-        /// </summary>
-        [ForeignKey("OwnerId")]
-        public ApplicationUser? Owner { get; set; }
 
         /// <summary>
         /// The defect owner id.
@@ -59,15 +43,19 @@ namespace DefectReporter.Shared.Models.Application
         public string? OwnerId { get; set; }
 
         /// <summary>
-        /// The current user.
+        /// The defect owner name.
         /// </summary>
-        [ForeignKey("CurrentUserId")]
-        public ApplicationUser? CurrentUser { get; set; }
+        public string? OwnerName { get; set; }
 
         /// <summary>
         /// The current user id.
         /// </summary>
         public string? CurrentUserId { get; set; }
+
+        /// <summary>
+        /// The current user name.
+        /// </summary>
+        public string? CurrentuserName { get; set; }
 
         /// <summary>
         /// The release.
@@ -79,8 +67,56 @@ namespace DefectReporter.Shared.Models.Application
         /// The release id.
         /// </summary>
         public int? ReleaseId { get; set; }
-=======
-        public List<Comment> Comments { get; set; }
->>>>>>> 66555a5994784c2829e624147c64dc89ac1ae17d
+
+        /// <summary>
+        /// The value which indicates regression
+        /// </summary>
+        public bool IsRegression { get; set; }
+
+        /// <summary>
+        /// The value which indicates defect is fixed.
+        /// </summary>
+        public bool IsFixed { get; set; }
+
+        /// <summary>
+        /// The defect completed reason.
+        /// </summary>
+        public DefectCompletedReasonEnum? CompletedReason { get; set; }
+
+        /// <summary>
+        /// The fixed on version
+        /// </summary>
+        public string? FixedOnVersion { get; set; }
+
+        /// <summary>
+        /// The date time of created.
+        /// </summary>
+        public DateTime Created { get; set; }
+
+        /// <summary>
+        /// The defect status.
+        /// </summary>
+        public DefectStatusEnum Status { get; set; }
+
+        /// <summary>
+        /// The component.
+        /// </summary>
+        public ComponentEnum Component { get; set; }
+
+        /// <summary>
+        /// The date time of end.
+        /// </summary>
+        public DateTime? End { get; set; }
+
+        /// <summary>
+        /// The software build.
+        /// </summary>
+        [ForeignKey("SoftwareId")]
+        public SoftwareBuild? SoftwareBuild { get; set; }
+
+        /// <summary>
+        /// The software id.
+        /// </summary>
+        public int? SoftwareId { get; set; }
     }
 }

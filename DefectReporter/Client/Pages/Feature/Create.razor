@@ -1,23 +1,80 @@
 ﻿@page "/feature/create"
 
 @using DefectReporter.Shared.Models.Application
+@using DefectReporter.Shared.Enums
+
 @inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager NavigationManager
 
 <h3>Add feature</h3>
 
-@if (successMessage != null)
+@if (message != null)
 {
-    <p>@successMessage</p>
+    <p>@message</p>
 }
 else
 {
+    <EditForm Model="feature" OnValidSubmit="CreateFeature">
+        <div class="form-group">
+            <label for="Title">Title:</label>
+            <InputText id="Name" class="form-control" @bind-Value="feature.Title" required />
+            <ValidationMessage For="@(() => feature.Title)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Description">Descriptiopn:</label>
+            <InputText id="Description" class="form-control" @bind-Value="feature.Description" required />
+            <ValidationMessage For="@(() => feature.Description)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Component">Component:</label>
+            <InputSelect id="Component" class="form-control" @bind-Value="feature.Component" required>
+                @foreach (var enumValue in Enum.GetValues(typeof(ComponentEnum)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => feature.Component)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Release">Release:</label>
+            <InputSelect id="Release" class="form-control" @bind-Value="feature.ReleaseId" required>
+                @foreach (var release in releases)
+                {
+                    <option value="@release.Id">@release.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => feature.ReleaseId)" />
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" @onclick="GoBackToIndex">Back</button>
+    </EditForm>
 }
 
 @code {
     private Feature feature = new Feature();
-    private string successMessage;
+    private List<Release> releases = new List<Release>();
+    private string message;
 
-    private async Task AddFeature()
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private async Task CreateFeature()
     {
         var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
 
@@ -25,11 +82,16 @@ else
 
         if (response.IsSuccessStatusCode)
         {
-            successMessage = await response.Content.ReadAsStringAsync();
+            message = await response.Content.ReadAsStringAsync();
         }
         else
         {
-            successMessage = "Failed to add feature.";
+            message = "Failed to add feature.";
         }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/feature/index");
     }
 }

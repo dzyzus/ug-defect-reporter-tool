@@ -1,0 +1,103 @@
+﻿@page "/management/softwarebuilds/index"
+
+@using DefectReporter.Shared.Models.Application
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IHttpClientFactory HttpClientFactory
+
+@if (softwareBuilds.Count != 0)
+{
+    <div class="text-end">
+        <button type="button" class="btn btn-success" @onclick="() => AddSoftwareBuild()">Add new</button>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-header">
+            <h3>Available software builds</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach (SoftwareBuild softwareBuild in softwareBuilds)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>@softwareBuild.SoftwareVersion</span>
+                    <div class="btn-group" role="group" aria-label="Release Actions">
+                        <button type="button" class="btn btn-primary" @onclick="() => EditSoftwareBuild(softwareBuild.Id)">Edit</button>
+                        <button type="button" class="btn btn-danger" @onclick="() => DeleteSoftwareBuild(softwareBuild.Id)">Delete</button>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="spinner-border text-center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+}
+
+@code {
+    List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            softwareBuilds = await client.GetFromJsonAsync<List<SoftwareBuild>>("api/management/getsoftwarebuilds");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    @inject NavigationManager NavigationManager
+
+    private void AddSoftwareBuild()
+    {
+        NavigationManager.NavigateTo("/management/addSoftwareBuild/");
+    }
+
+    private void EditSoftwareBuild(int softwareBuildId)
+    {
+        NavigationManager.NavigateTo($"/management/updateSoftwareBuild/{softwareBuildId}");
+    }
+
+    @inject IJSRuntime JS
+
+    private async Task DeleteSoftwareBuild(int softwareBuildId)
+    {
+        bool confirm = await JS.InvokeAsync<bool>("confirm", "Are you sure you want to delete this software build?");
+
+        if (confirm)
+        {
+            var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+            var response = await client.DeleteAsync($"api/management/deleteSoftwareBuild/{softwareBuildId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadSoftwareBuilds();
+            }
+            else
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+            }
+        }
+    }
+
+    private async Task LoadSoftwareBuilds()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            softwareBuilds = await client.GetFromJsonAsync<List<SoftwareBuild>>("api/management/getsoftwarebuilds");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+}

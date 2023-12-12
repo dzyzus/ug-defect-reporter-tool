@@ -1,0 +1,123 @@
+﻿@page "/feature/updatefeature/{featureId}"
+
+@using DefectReporter.Shared.Models.Application
+@using DefectReporter.Shared.Enums
+
+@inject NavigationManager NavigationManager
+@inject HttpClient HttpClient
+
+<h3>Edit Feature</h3>
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else if (feature != null)
+{
+    <EditForm Model="feature" OnValidSubmit="UpdateFeature">
+        <div class="form-group">
+            <label for="Title">Title:</label>
+            <InputText id="Name" class="form-control" @bind-Value="feature.Title" required/>
+            <ValidationMessage For="@(() => feature.Title)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Description">Descriptiopn:</label>
+            <InputText id="Description" class="form-control" @bind-Value="feature.Description" required />
+            <ValidationMessage For="@(() => feature.Description)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Component">Component:</label>
+            <InputSelect id="Component" class="form-control" @bind-Value="feature.Component" required>
+                @foreach (var enumValue in Enum.GetValues(typeof(ComponentEnum)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => feature.Component)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Release">Release:</label>
+            <InputSelect id="Release" class="form-control" @bind-Value="feature.ReleaseId" required>
+                @foreach (var release in releases)
+                {
+                    <option value="@release.Id">@release.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => feature.ReleaseId)" />
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" @onclick="GoBackToIndex">Back</button>
+    </EditForm>
+}
+else
+{
+    <div class="spinner-border text-center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public string FeatureId { get; set; }
+
+    private Feature feature;
+    private string message;
+    List<Release> releases = new List<Release>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadFeature();
+    }
+
+    @inject IHttpClientFactory HttpClientFactory
+
+    private async Task LoadFeature()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            feature = await client.GetFromJsonAsync<Feature>($"api/feature/getFeature/{Convert.ToInt32(FeatureId)}");
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private async Task UpdateFeature()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            var response = await client.PutAsJsonAsync($"api/feature/updateFeature/{Convert.ToInt32(FeatureId)}", feature);
+
+            if (response.IsSuccessStatusCode)
+            {
+                NavigationManager.NavigateTo("/feature/index");
+            }
+            else
+            {
+                LoadFeature();
+                message = await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/feature/index");
+    }
+}

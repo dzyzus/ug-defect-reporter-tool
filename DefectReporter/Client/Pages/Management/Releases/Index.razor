@@ -6,20 +6,33 @@
 
 @if (releases.Count != 0)
 {
-    <h3>Available releases</h3>
-
-    foreach (Release release in releases)
-    {
-        <ul>
-            <li>
-                @release.Name
-            </li>
+    <div class="text-end">
+        <button type="button" class="btn btn-success" @onclick="() => AddRelease()">Add new</button>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-header">
+            <h3>Available Releases</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach (Release release in releases)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>@release.Name</span>
+                    <div class="btn-group" role="group" aria-label="Release Actions">
+                        <button type="button" class="btn btn-primary" @onclick="() => EditRelease(release.Id)">Edit</button>
+                        <button type="button" class="btn btn-danger" @onclick="() => DeleteRelease(release.Id)">Delete</button>
+                    </div>
+                </li>
+            }
         </ul>
-    }
+    </div>
 }
-else
+else if (releases == null)
 {
-    <h3>Currently there is no defects in database.</h3>
+    <div class="spinner-border text-center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
 }
 
 @code {
@@ -31,7 +44,55 @@ else
 
         try
         {
-            releases = await client.GetFromJsonAsync<List<Release>>("api/management/releases/getreleases");
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+    @inject NavigationManager NavigationManager
+
+    private void AddRelease()
+    {
+        NavigationManager.NavigateTo("/management/addRelease/");
+    }
+
+    private void EditRelease(int releaseId)
+    {
+        NavigationManager.NavigateTo($"/management/updateRelease/{releaseId}");
+    }
+
+    @inject IJSRuntime JS
+
+    private async Task DeleteRelease(int releaseId)
+    {
+        bool confirm = await JS.InvokeAsync<bool>("confirm", "Are you sure you want to delete this release?");
+
+        if (confirm)
+        {
+            var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+            var response = await client.DeleteAsync($"api/management/deleteRelease/{releaseId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadReleases();
+            }
+            else
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+            }
+        }
+    }
+
+    private async Task LoadReleases()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
         }
         catch (AccessTokenNotAvailableException exception)
         {
