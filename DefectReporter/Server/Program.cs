@@ -6,7 +6,6 @@ namespace DefectReporter
     using DefectReporter.Server.Data.Identity;
     using DefectReporter.Shared.Models.Identity;
     using Microsoft.AspNetCore.Authentication;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     #endregion

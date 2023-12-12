@@ -76,7 +76,7 @@ namespace DefectReporter.Shared.Models.Application
         /// <summary>
         /// The value which indicates defect is fixed.
         /// </summary>
-        public bool? IsFixed { get; set; }
+        public bool IsFixed { get; set; }
 
         /// <summary>
         /// The defect completed reason.

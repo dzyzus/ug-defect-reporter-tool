@@ -165,6 +165,7 @@ else
         defect.Created = DateTime.Now;
         defect.Status = DefectStatusEnum.New;
         defect.CurrentuserName = applicationUsers.First(user => user.Id == defect.CurrentUserId).UserName;
+        defect.CompletedReason = DefectCompletedReasonEnum.InProgress;
 
         var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
 

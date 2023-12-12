@@ -35,7 +35,7 @@
         /// The defect.
         /// </summary>
         [ForeignKey("DefectId")]
-        public Defect Defect { get; set; }
+        public Defect? Defect { get; set; }
 
         /// <summary>
         /// The defect id.

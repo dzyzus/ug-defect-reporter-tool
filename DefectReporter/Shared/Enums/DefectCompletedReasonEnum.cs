@@ -1,25 +1,32 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace DefectReporter.Shared.Enums
 {
     public enum DefectCompletedReasonEnum
     {
         /// <summary>
+        /// In progress
+        /// </summary>
+        [Display(Name = "In progress")]
+        InProgress = 0,
+
+        /// <summary>
         /// Not a defect.
         /// </summary>
-        [Description("Not a defect")]
-        NotADefect = 0,
+        [Display(Name = "Not a defect")]
+        NotADefect,
 
         /// <summary>
         /// Fixed.
         /// </summary>
-        [Description("Fixed")]
+        [Display(Name = "Fixed")]
         Fixed,
 
         /// <summary>
         /// Will not be fixed.
         /// </summary>
-        [Description("Will be not fixed")]
+        [Display(Name = "Will be not fixed")]
         WillBeNotFixed
     }
 }
