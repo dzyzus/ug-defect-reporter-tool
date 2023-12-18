@@ -697,7 +697,6 @@ C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Ser
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.AssemblyInfoInputs.cache
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.AssemblyInfo.cs
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.csproj.CoreCompileInputs.cache
-C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.RazorAssemblyInfo.cache
 C:\Users\wrkmm\OneDrive\Pulpit\Docker\ug-defect-reporter-tool\DefectReporter\Server\obj\Debug\net7.0\DefectReporter.Server.RazorAssemblyInfo.cs

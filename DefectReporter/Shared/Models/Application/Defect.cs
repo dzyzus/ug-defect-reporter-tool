@@ -118,5 +118,11 @@ namespace DefectReporter.Shared.Models.Application
         /// The software id.
         /// </summary>
         public int? SoftwareId { get; set; }
+
+        /// <summary>
+        /// The list with emails of users involved.
+        /// </summary>
+        [NotMapped]
+        public IEnumerable<string> UsersInvolvedEmails { get; set; }
     }
 }
