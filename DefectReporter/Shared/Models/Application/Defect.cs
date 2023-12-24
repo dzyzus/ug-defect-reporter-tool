@@ -123,6 +123,6 @@ namespace DefectReporter.Shared.Models.Application
         /// The list with emails of users involved.
         /// </summary>
         [NotMapped]
-        public IEnumerable<string> UsersInvolvedEmails { get; set; }
+        public List<string> UsersInvolvedEmails { get; set; }
     }
 }
