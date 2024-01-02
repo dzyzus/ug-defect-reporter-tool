@@ -1,5 +1,107 @@
-﻿<h3>Details</h3>
+﻿@page "/feature/details/{FeatureId}"
+
+@using DefectReporter.Shared.Models.Application
+@using DefectReporter.Shared.Enums
+
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager NavigationManager
+
+<h3>@feature.Title</h3>
+<hr />
+<br />
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else if (coveredByTests != null)
+{
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label"><b>Description</b></label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" id="description" value="@feature.Description">
+        </div>
+    </div>
+    <br />
+    <div class="form-group row">
+        <label for="release" class="col-sm-2 col-form-label"><b>Release</b></label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" id="release" value="@releaseName">
+        </div>
+    </div>
+    <br />
+    <div class="form-group row">
+        <label for="component" class="col-sm-2 col-form-label"><b>Component</b></label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" id="component" value="@feature.Component">
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="card">
+            @foreach (Test test in coveredByTests)
+            {
+                <div class="card-header">
+                    TCD: @test.TestName
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <ul style="list-style-type: none">
+                            @foreach (var step in test.TestCase.Split('\n'))
+                            {
+                                <li>@step.Trim()</li>
+                            }
+                        </ul>
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+    <br>
+    <button type="button" class="btn btn-primary" @onclick="GoBackToIndex">Back</button>
+}
 
 @code {
+    [Parameter]
+    public string FeatureId { get; set; }
 
+    private Feature feature = new Feature();
+    private string releaseName;
+    private List<Test> coveredByTests;
+    private string message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            feature = await client.GetFromJsonAsync<Feature>($"api/feature/getfeature/{FeatureId}");
+
+            var releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
+            var tests = await client.GetFromJsonAsync<List<Test>>("api/test/gettests");
+
+            releaseName = releases.Where(release => release.Id == feature.ReleaseId).First().Name;
+            coveredByTests = tests.Where(test => test.FeatureId == feature.Id).ToList();
+
+            if (coveredByTests.Count == 0)
+            {
+                coveredByTests.Add(new Test() { TestName = "None" });
+            }
+
+            if (feature == null)
+            {
+                message = "Feature not found.";
+            }
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/feature/index");
+    }
 }

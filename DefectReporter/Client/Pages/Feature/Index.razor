@@ -27,6 +27,7 @@
                     <td>@feature.Component</td>
                     <td>@releases.First(release => release.Id == feature.ReleaseId)?.Name</td>
                     <td>
+                        <button type="button" class="btn btn-success" @onclick="() => GetDetails(feature.Id)">Details</button>
                         <button type="button" class="btn btn-primary" @onclick="() => EditFeature(feature.Id)">Edit</button>
                         <button type="button" class="btn btn-danger" @onclick="() => DeleteFeature(feature.Id)">Delete</button>
                     </td>
@@ -72,6 +73,11 @@ else
     private void EditFeature(int featureId)
     {
         NavigationManager.NavigateTo($"/feature/updatefeature/{featureId}");
+    }
+
+    private void GetDetails(int featureId)
+    {
+        NavigationManager.NavigateTo($"/feature/details/{featureId}");
     }
 
     @inject IJSRuntime JS

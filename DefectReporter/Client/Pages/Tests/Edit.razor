@@ -23,7 +23,7 @@ else
         <br>
         <div class="form-group">
             <label for="TestCase">Description:</label>
-            <InputText id="TestCase" class="form-control" @bind-Value="test.TestCase" required />
+            <InputTextArea id="TestCase" @bind-Value="test.TestCase" class="form-control" rows="11"></InputTextArea>
             <ValidationMessage For="@(() => test.TestCase)" />
         </div>
         <br>

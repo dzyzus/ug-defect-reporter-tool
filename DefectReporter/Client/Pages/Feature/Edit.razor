@@ -23,7 +23,7 @@ else if (feature != null)
         <br>
         <div class="form-group">
             <label for="Description">Descriptiopn:</label>
-            <InputText id="Description" class="form-control" @bind-Value="feature.Description" required />
+            <InputTextArea @bind-Value="feature.Description" class="form-control" rows="11"></InputTextArea>
             <ValidationMessage For="@(() => feature.Description)" />
         </div>
         <br>
