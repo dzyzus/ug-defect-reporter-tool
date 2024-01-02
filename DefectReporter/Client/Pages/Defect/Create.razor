@@ -3,6 +3,8 @@
 @using DefectReporter.Shared.Models.Application
 @using DefectReporter.Shared.Models.Identity
 @using DefectReporter.Shared.Enums
+@using DefectReporter.Shared.Services
+@using DefectReporter.Client.ViewModels
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -92,12 +94,13 @@ else
         </div>
 
         <label for="usersSelect">Select Users:</label>
-        <InputSelect id="usersSelect" multiple="true" @bind-Value="selectedUsers">
-            @foreach (var user in usersSelectMenu)
-            {
-                <option value="@user.Value">@user.Value</option>
-            }
-        </InputSelect>
+        @foreach (var item in usersCheckbox)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="@item.Email" @bind="item.IsChecked" />
+                <label class="form-check-label" for="@item.Email">@item.UserName - @item.Email</label>
+            </div>
+        }
 
         <br>
         <button type="submit" class="btn btn-primary">Report defect</button>
@@ -110,8 +113,7 @@ else
     private List<Release> releases = new List<Release>();
     private List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
     private List<ApplicationUser> applicationUsers = new List<ApplicationUser>();
-    private Dictionary<string, string> usersSelectMenu = new Dictionary<string, string>();
-    private List<string> selectedUsers = new List<string>();
+    private List<UsersViewModel> usersCheckbox = new List<UsersViewModel>();
 
     @inject AuthenticationStateProvider GetAuthenticationStateAsync
 
@@ -129,11 +131,9 @@ else
             releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
             applicationUsers = await client.GetFromJsonAsync<List<ApplicationUser>>("api/user/getusers");
 
-            usersSelectMenu.Add(key: "Select ", value: "User");
-
             foreach (var user in applicationUsers)
             {
-                usersSelectMenu.Add(key: user.FirstName + " " + user.LastName, value: user.Email);
+                usersCheckbox.Add(new UsersViewModel() { UserName = @user.FirstName + " " + @user.LastName, Email = user.Email, IsChecked = false });
             }
 
 
@@ -184,7 +184,13 @@ else
         defect.Status = DefectStatusEnum.New;
         defect.CurrentuserName = applicationUsers.First(user => user.Id == defect.CurrentUserId).UserName;
         defect.CompletedReason = DefectCompletedReasonEnum.InProgress;
-        defect.UsersInvolvedEmails = selectedUsers;
+        var a = usersCheckbox.Where(item => item.IsChecked).Select(item => item.Email).ToList();
+        defect.UsersInvolvedEmails = a;
+
+        //if (!defect.UsersInvolvedEmails.Contains(applicationUsers.First(user => user.Id == defect.CurrentUserId).Email))
+        //{
+        //    defect.UsersInvolvedEmails.Add(applicationUsers.First(user => user.Id == defect.CurrentUserId).Email);
+        //}
 
         var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
 
@@ -195,6 +201,19 @@ else
         else
         {
             message = "Failed to create defect.";
+        }
+
+        @inject IEmailService EmailService
+
+        var emailServiceResponse = await client.PostAsJsonAsync("/api/email/sendEmails", defect.UsersInvolvedEmails);
+
+        if (emailServiceResponse.IsSuccessStatusCode)
+        {
+            message = await response.Content.ReadAsStringAsync();
+        }
+        else
+        {
+            message = "Failed to send email notifications.";
         }
     }
 }

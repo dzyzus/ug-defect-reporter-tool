@@ -8,6 +8,7 @@ namespace DefectReporter
     using DefectReporter.Server.Data.Application;
     using DefectReporter.Server.Data.Identity;
     using DefectReporter.Shared.Models.Identity;
+    using DefectReporter.Shared.Services;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.EntityFrameworkCore;
 
@@ -53,6 +54,8 @@ namespace DefectReporter
             builder.Services.AddControllers();
 
             builder.Services.AddScoped<SeedData>();
+
+            builder.Services.AddTransient<IEmailService, EmailService>();
 
             var app = builder.Build();
 

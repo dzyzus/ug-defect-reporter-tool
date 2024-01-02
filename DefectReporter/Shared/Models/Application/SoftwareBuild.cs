@@ -38,6 +38,6 @@
         /// <summary>
         /// The defect.
         /// </summary>
-        public Defect? Defect { get; set; }
+        public List<Defect>? Defects { get; set; }
     }
 }

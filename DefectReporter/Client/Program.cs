@@ -1,9 +1,17 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-
 namespace DefectReporter.Client
 {
+    #region Usings
+
+    using DefectReporter.Shared.Services;
+    using Microsoft.AspNetCore.Components.Web;
+    using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+    using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+
+    #endregion
+
+    /// <summary>
+    /// The main program.
+    /// </summary>
     public class Program
     {
         public static async Task Main(string[] args)
@@ -15,13 +23,13 @@ namespace DefectReporter.Client
             builder.Services.AddHttpClient("DefectReporter.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-            // Configuring a second HttpClient for unauthenticated requests
             builder.Services.AddHttpClient("DefectReporter.PublicServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
-            // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("DefectReporter.ServerAPI"));
 
             builder.Services.AddApiAuthorization();
+
+            builder.Services.AddTransient<IEmailService, EmailService>();
 
             await builder.Build().RunAsync();
         }

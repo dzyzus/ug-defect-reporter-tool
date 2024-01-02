@@ -24,10 +24,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Defect/Create.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVmZWN0XENyZWF0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
