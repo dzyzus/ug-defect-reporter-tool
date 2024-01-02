@@ -44,12 +44,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxDcmVhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Feature/Details.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxEZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Feature/Edit.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxFZGl0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Feature/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmVhdHVyZVxJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/FrequentlyAskedQuestions.razor]
@@ -86,6 +94,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Management/SoftwareBuilds/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlbWVudFxTb2Z0d2FyZUJ1aWxkc1xJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Tests/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVzdHNcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Tests/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVzdHNcRWRpdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/wrkmm/OneDrive/Pulpit/Docker/ug-defect-reporter-tool/DefectReporter/Client/Pages/Tests/Index.razor]
