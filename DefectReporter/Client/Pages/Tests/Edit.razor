@@ -1,0 +1,128 @@
+﻿@page "/test/updatetest/{TestId}"
+
+@using DefectReporter.Shared.Models.Application
+@using DefectReporter.Shared.Enums
+
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager NavigationManager
+
+<h3>Edit Test</h3>
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else
+{
+    <EditForm Model="test" OnValidSubmit="UpdateTest">
+        <div class="form-group">
+            <label for="Title">Title:</label>
+            <InputText id="Name" class="form-control" @bind-Value="test.TestName" required />
+            <ValidationMessage For="@(() => test.TestName)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="TestCase">Description:</label>
+            <InputText id="TestCase" class="form-control" @bind-Value="test.TestCase" required />
+            <ValidationMessage For="@(() => test.TestCase)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Component">Component:</label>
+            <InputSelect id="Component" class="form-control" @bind-Value="test.Component" required>
+                @foreach (var enumValue in Enum.GetValues(typeof(ComponentEnum)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => test.Component)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="TypeOfTest">Type of test:</label>
+            <InputSelect id="TypeOfTest" class="form-control" @bind-Value="test.TypeOfTest" required>
+                @foreach (var enumValue in Enum.GetValues(typeof(TypeOfTest)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => test.TypeOfTest)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Feature">Feature covered:</label>
+            <InputSelect id="Feature" class="form-control" @bind-Value="test.FeatureId" required>
+                @foreach (var feature in features)
+                {
+                    <option value="@feature.Id">@feature.Title</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => test.FeatureId)" />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="IsAutomated">Is automated: </label>
+            <InputCheckbox id="IsAutomated" @bind-Value="test.IsAutomated" />
+            <ValidationMessage For="@(() => test.IsAutomated)" />
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <button type="button" class="btn btn-secondary" @onclick="GoBackToIndex">Back</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string TestId { get; set; }
+
+    private Test test = new Test();
+    private List<Feature> features = new List<Feature>();
+    private string message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            features = await client.GetFromJsonAsync<List<Feature>>("api/test/getfeatures");
+
+            var response = await client.GetFromJsonAsync<Test>($"api/test/gettest/{TestId}");
+
+            if (response != null)
+            {
+                test = response;
+            }
+            else
+            {
+                message = "Test not found.";
+            }
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private async Task UpdateTest()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        var response = await client.PutAsJsonAsync($"/api/test/updateTest/{TestId}", test);
+
+        if (response.IsSuccessStatusCode)
+        {
+            this.GoBackToIndex();
+        }
+        else
+        {
+            message = "Failed to update test.";
+        }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/test/index");
+    }
+}

@@ -9,7 +9,7 @@
 
 @inject IHttpClientFactory HttpClientFactory
 
-<h3 class="text-center">Defects</h3>
+<h3 class="text-center">Report a new defect</h3>
 <br />
 
 @if (message != null)
@@ -81,7 +81,7 @@ else
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 col-form-label">The user who take care on</label>
+            <label class="col-sm-2 col-form-label">Current owner</label>
             <InputSelect id="currentUser" class="form-control" @bind-Value="defect.CurrentUserId">
                 @foreach (var user in applicationUsers)
                 {
@@ -90,6 +90,14 @@ else
             </InputSelect>
             <ValidationMessage For="@(() => defect.CurrentUserId)" />
         </div>
+
+        <label for="usersSelect">Select Users:</label>
+        <InputSelect id="usersSelect" multiple="true" @bind-Value="selectedUsers">
+            @foreach (var user in usersSelectMenu)
+            {
+                <option value="@user.Value">@user.Value</option>
+            }
+        </InputSelect>
 
         <br>
         <button type="submit" class="btn btn-primary">Report defect</button>
@@ -102,6 +110,8 @@ else
     private List<Release> releases = new List<Release>();
     private List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
     private List<ApplicationUser> applicationUsers = new List<ApplicationUser>();
+    private Dictionary<string, string> usersSelectMenu = new Dictionary<string, string>();
+    private List<string> selectedUsers = new List<string>();
 
     @inject AuthenticationStateProvider GetAuthenticationStateAsync
 
@@ -118,6 +128,14 @@ else
         {
             releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
             applicationUsers = await client.GetFromJsonAsync<List<ApplicationUser>>("api/user/getusers");
+
+            usersSelectMenu.Add(key: "Select ", value: "User");
+
+            foreach (var user in applicationUsers)
+            {
+                usersSelectMenu.Add(key: user.FirstName + " " + user.LastName, value: user.Email);
+            }
+
 
             releases.Insert(index: 0, new Release
             {
@@ -166,6 +184,7 @@ else
         defect.Status = DefectStatusEnum.New;
         defect.CurrentuserName = applicationUsers.First(user => user.Id == defect.CurrentUserId).UserName;
         defect.CompletedReason = DefectCompletedReasonEnum.InProgress;
+        defect.UsersInvolvedEmails = selectedUsers;
 
         var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
 

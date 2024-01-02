@@ -30,8 +30,14 @@
 }
 else if (releases == null)
 {
-    <div class="spinner-border text-center" role="status">
-        <span class="sr-only">Loading...</span>
+    <h3>Currently there is no releases in database.</h3>
+}
+else
+{
+    <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+        <div class="spinner-border text-center" role="status" style="width: 5rem; height: 5rem;">
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
 }
 

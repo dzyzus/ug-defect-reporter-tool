@@ -53,11 +53,12 @@
         /// The feature.
         /// </summary>
         [ForeignKey("FeatureId")]
-        public Feature Feature { get; set; }
+        public Feature? Feature { get; set; }
 
         /// <summary>
         /// The feature id.
         /// </summary>
+        [Required]
         public int FeatureId { get; set; }
     }
 }
