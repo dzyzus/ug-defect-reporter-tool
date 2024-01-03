@@ -51,5 +51,10 @@
         /// The comment owner name.
         /// </summary>
         public string? OwnerName { get; set; }
+
+        /// <summary>
+        /// The user full name.
+        /// </summary>
+        public string? FullName { get; set; }
     }
 }

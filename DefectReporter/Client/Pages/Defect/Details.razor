@@ -1,7 +1,9 @@
 ﻿@page "/defect/getdefectdetails/{defectid}"
 @using DefectReporter.Shared.Models.Application
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using DefectReporter.Shared.Models.Identity
 @using DefectReporter.Shared.Helpers
+@using DefectReporter.Shared.Services
 @using Markdig
 
 @inject IHttpClientFactory HttpClientFactory
@@ -170,7 +172,7 @@ else
                         {
                             <button class="btn-sm btn-danger position-absolute top-0 end-0 m-2" @onclick="() => DeleteComment(comment.Id)">Delete</button>
                         }
-                        <p class="card-text"><strong>@comment.OwnerName:</strong></p>
+                        <p class="card-text"><strong>@comment.FullName - @comment.OwnerName</strong></p>
                         <p class="card-text">@comment.Content</p>
                         <p class="card-text"><em>Posted on @comment.CreateDate</em></p>
                     </div>
@@ -274,6 +276,7 @@ else
         try
         {
             var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+            var applicationUsers = await client.GetFromJsonAsync<List<ApplicationUser>>("api/user/getusers");
 
             Comment comment = new Comment
             {
@@ -281,6 +284,7 @@ else
                 Content = NewComment,
                 OwnerName = authenticationState.User.Identity.Name,
                 OwnerId = authenticationState.User.FindFirst("sub")?.Value,
+                FullName = applicationUsers.First(user => user.Email == defect.OwnerName).FirstName + " " + applicationUsers.First(user => user.Email == defect.OwnerName).LastName,
                 CreateDate = DateTime.Now
             };
 
@@ -289,6 +293,20 @@ else
             if (response.IsSuccessStatusCode)
             {
                 message = await response.Content.ReadAsStringAsync();
+
+                @inject IEmailService EmailService
+
+                var emailServiceResponse = await client.PostAsJsonAsync("/api/email/commentSendEmails", comment);
+
+                if (emailServiceResponse.IsSuccessStatusCode)
+                {
+                    message = await response.Content.ReadAsStringAsync();
+                }
+                else
+                {
+                    message = "Failed to send email notifications.";
+                }
+
                 await LoadDefect();
                 NewComment = string.Empty;
             }

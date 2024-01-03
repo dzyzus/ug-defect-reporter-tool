@@ -184,13 +184,14 @@ else
         defect.Status = DefectStatusEnum.New;
         defect.CurrentuserName = applicationUsers.First(user => user.Id == defect.CurrentUserId).UserName;
         defect.CompletedReason = DefectCompletedReasonEnum.InProgress;
-        var a = usersCheckbox.Where(item => item.IsChecked).Select(item => item.Email).ToList();
-        defect.UsersInvolvedEmails = a;
+        var usersEmails = usersCheckbox.Where(item => item.IsChecked).Select(item => item.Email).ToList();
 
-        //if (!defect.UsersInvolvedEmails.Contains(applicationUsers.First(user => user.Id == defect.CurrentUserId).Email))
-        //{
-        //    defect.UsersInvolvedEmails.Add(applicationUsers.First(user => user.Id == defect.CurrentUserId).Email);
-        //}
+        if (!usersEmails.Contains(defect.OwnerName))
+        {
+            usersEmails.Add(defect.OwnerName);
+        }
+
+        defect.UsersInvolvedEmails = string.Join(";", usersEmails);
 
         var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
 
@@ -205,7 +206,7 @@ else
 
         @inject IEmailService EmailService
 
-        var emailServiceResponse = await client.PostAsJsonAsync("/api/email/sendEmails", defect.UsersInvolvedEmails);
+        var emailServiceResponse = await client.PostAsJsonAsync("/api/email/defectSendEmails", defect);
 
         if (emailServiceResponse.IsSuccessStatusCode)
         {
