@@ -28,7 +28,7 @@
                     <td>@defect.OwnerName</td>
                     <td>@defect.Component</td>
                     <td>@defect.Status</td>
-                    <td>@defect.Created.ToString("dd-mm-yyyy")</td>
+                    <td>@defect.Created</td>
                     <td>
                         <button type="button" class="btn btn-primary" @onclick="() => GetDefectDetails(defect.Id)">Details</button>
                         <button type="button" class="btn btn-primary" @onclick="() => EditDefect(defect.Id)">Edit</button>
@@ -41,15 +41,15 @@
 }
 else if (defects == null)
 {
+    <h3 class="text-center">Currently there is no defects in database.</h3>
+}
+else
+{
     <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
         <div class="spinner-border text-center" role="status" style="width: 5rem; height: 5rem;">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-}
-else
-{
-    <h3 class="text-center">Currently there is no defects in database.</h3>
 }
 
 @code {

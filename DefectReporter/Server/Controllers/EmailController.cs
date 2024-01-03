@@ -77,13 +77,44 @@
                 }
             }
 
-            // Wynikowy przetworzony tekst
             string body = String.Empty;
 
             body += $"<b>Owner:</b> {defect.OwnerName}<br>";
             body += $"<b>Component:</b> {defect.Component}<br>";
 
             body += "<br>" + parsedText.ToString();
+
+            try
+            {
+                foreach (var userEmail in usersEmails)
+                {
+                    await emailService.SendEmailAsync(userEmail, title, body);
+                }
+
+                return Ok("Emails sent successfully.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Failed to send emails.");
+            }
+        }
+
+        /// <summary>
+        /// The defect update emails notify.
+        /// </summary>
+        /// <param name="defect">
+        /// The defect model.
+        /// </param>
+        /// <returns>
+        /// Returns action status.
+        /// </returns>
+        [HttpPost("updateSendEmails")]
+        public async Task<IActionResult> UpdateSendEmails([FromBody] Defect defect)
+        {
+            string title = $"[DEFECT NOTIFY] UPDATE - {defect.Title}";
+            List<string> usersEmails = defect.UsersInvolvedEmails.Split(";").ToList();
+
+            string body = $"Defect was updated. Please review changes.";
 
             try
             {

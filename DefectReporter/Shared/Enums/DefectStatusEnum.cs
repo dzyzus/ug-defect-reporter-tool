@@ -15,6 +15,11 @@
         /// <summary>
         /// The resolved status.
         /// </summary>
-        Resolved 
+        Resolved,
+
+        /// <summary>
+        /// The rejected status.
+        /// </summary>
+        Rejected
     }
 }

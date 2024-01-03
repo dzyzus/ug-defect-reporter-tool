@@ -54,6 +54,15 @@ else
 
                 <div class="row border-bottom">
                     <div class="col-md-3">
+                        <p class="card-text"><strong>Test:</strong></p>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="card-text">@testName</p>
+                    </div>
+                </div>
+
+                <div class="row border-bottom">
+                    <div class="col-md-3">
                         <p class="card-text"><strong>Is Regression:</strong></p>
                     </div>
                     <div class="col-md-9">
@@ -201,9 +210,11 @@ else
     private string NewComment { get; set; }
     private string softwareBuild { get; set; }
     private string releaseName { get; set; }
+    private string testName{ get; set; }
     private AuthenticationState? authenticationState { get; set; }
 
     List<SoftwareBuild> softwareBuilds = new List<SoftwareBuild>();
+    List<Test> tests = new List<Test>();
     List<Release> releases = new List<Release>();
     Defect defect;
 
@@ -229,10 +240,12 @@ else
             releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
             softwareBuilds = await client.GetFromJsonAsync<List<SoftwareBuild>>("api/management/getsoftwarebuilds");
             defect = await client.GetFromJsonAsync<Defect>($"api/defect/getdefectdetails/{Convert.ToInt32(DefectId)}");
+            tests = await client.GetFromJsonAsync<List<Test>>("api/test/gettests");
             releaseName = releases.Where(release => release.Id == defect.ReleaseId).FirstOrDefault().Name;
             softwareBuild = softwareBuilds.Where(sw => sw.Id == defect.SoftwareId).FirstOrDefault().SoftwareVersion;
             authenticationState = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
             defect.Comments = await client.GetFromJsonAsync<List<Comment>>($"api/comment/getcomments/{Convert.ToInt32(DefectId)}");
+            testName = tests.Where(test => test.Id == defect.TestId).FirstOrDefault().TestName;
         }
         catch (Exception ex)
         {

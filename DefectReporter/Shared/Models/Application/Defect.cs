@@ -120,6 +120,17 @@ namespace DefectReporter.Shared.Models.Application
         public int? SoftwareId { get; set; }
 
         /// <summary>
+        /// The test.
+        /// </summary>
+        [ForeignKey("TestId")]
+        public Test? Test { get; set; }
+
+        /// <summary>
+        /// The test id.
+        /// </summary>
+        public int? TestId { get; set; }
+
+        /// <summary>
         /// The list with emails of users involved.
         /// </summary>
         public string UsersInvolvedEmails { get; set; }

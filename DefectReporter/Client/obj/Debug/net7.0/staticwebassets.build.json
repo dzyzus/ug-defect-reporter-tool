@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HHMqtAdecANvHUEIOF7zAIK6HB5pqByUN/3fAt4hp3I=",
+  "Hash": "AQ47kGfHpk3pP4XQVpU7RAoTszUMzMlWRYlMrj5NgTI=",
   "Source": "DefectReporter.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -9314,6 +9314,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\wwwroot\\scripts\\chart.js",
+      "SourceId": "DefectReporter.Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\wrkmm\\OneDrive\\Pulpit\\Docker\\ug-defect-reporter-tool\\DefectReporter\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "scripts/chart.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\scripts\\chart.js"
     }
   ]
 }

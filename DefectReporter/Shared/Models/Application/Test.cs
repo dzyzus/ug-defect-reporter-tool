@@ -60,5 +60,10 @@
         /// </summary>
         [Required]
         public int FeatureId { get; set; }
+
+        /// <summary>
+        /// The defect.
+        /// </summary>
+        public List<Defect>? Defects { get; set; }
     }
 }

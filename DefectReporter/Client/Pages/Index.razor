@@ -1,7 +1,68 @@
 ﻿@page "/"
+@using DefectModel = DefectReporter.Shared.Models.Application.Defect
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 <PageTitle>Dashboard</PageTitle>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Dashboard</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="myPieChart" width="400" height="200"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myPieChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="myPieChart" width="300" height="200"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myPieChart" width="300" height="200"></canvas>
+        </div>
+    </div>
 </div>
+
+@inject IJSRuntime JSRuntime
+@inject IHttpClientFactory HttpClientFactory
+
+@code {
+    private List<DefectModel> defects;
+    private string[] labels = { "Defects", "Fixed Defects" };
+
+    private async Task CreateChart()
+    {
+        if (defects != null)
+        {
+            var defectsCount = defects.Count(d => !d.IsFixed);
+            var fixedDefectsCount = defects.Count(d => d.IsFixed);
+
+            var data = new int[] { defectsCount, fixedDefectsCount };
+
+            await JSRuntime.InvokeVoidAsync("createPieChart", "myPieChart", labels, data);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+        await CreateChart(); // Przeniesienie wywołania CreateChart tutaj
+    }
+
+    private async Task LoadData()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.PublicServerAPI");
+
+        try
+        {
+            defects = await client.GetFromJsonAsync<List<DefectModel>>("api/defect/getdefects");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+
+        StateHasChanged();
+    }
+}

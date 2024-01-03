@@ -1,4 +1,4 @@
-﻿@page "/defect/create"
+﻿@page "/defect/updateDefect/{defectId}"
 
 @using DefectReporter.Shared.Models.Application
 @using DefectReporter.Shared.Models.Identity
@@ -8,10 +8,11 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using System.ComponentModel.DataAnnotations;
 
 @inject IHttpClientFactory HttpClientFactory
 
-<h3 class="text-center">Report a new defect</h3>
+<h3 class="text-center">Update Defect</h3>
 <br />
 
 @if (message != null)
@@ -28,7 +29,7 @@ else if (applicationUsers.Count == 0)
 }
 else
 {
-    <EditForm Model="@defect" OnValidSubmit="CreateDefect">
+    <EditForm Model="@defect" OnValidSubmit="UpdateDefect">
         <DataAnnotationsValidator />
 
         <div class="form-group">
@@ -88,9 +89,55 @@ else
         </div>
 
         <div class="form-group">
+            <label for="Component">Status</label>
+            <InputSelect id="Component" class="form-control" @bind-Value="defect.Status" required>
+                @foreach (var enumValue in Enum.GetValues(typeof(DefectStatusEnum)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => defect.Status)" />
+        </div>
+
+        <div class="form-group">
             <label class="col-sm-2 col-form-label">Regression</label>
+            <br>
             <InputCheckbox class="form-check-input" @bind-Value="defect.IsRegression" />
         </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Fixed</label>
+            <br>
+            <InputCheckbox class="form-check-input" @bind-Value="defect.IsFixed" />
+        </div>
+
+        @if (defect.IsFixed)
+        {
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">Fixed On Version</label>
+                <InputSelect id="softwarebuild" class="form-control" @bind-Value="defect.FixedOnVersion">
+                    @foreach (var software in GetFilteredSoftwareBuilds())
+                    {
+                        <option value="@software.SoftwareVersion">@software.SoftwareVersion</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => defect.FixedOnVersion)" />
+            </div>
+
+            <div class="form-group">
+                <label for="Component">Completed reason</label>
+                <InputSelect id="Component" class="form-control" @bind-Value="defect.CompletedReason" required>
+                    @foreach (var enumValue in Enum.GetValues(typeof(DefectCompletedReasonEnum)))
+                    {
+                        var field = typeof(DefectCompletedReasonEnum).GetField(enumValue.ToString());
+                        var displayAttribute = (DisplayAttribute)Attribute.GetCustomAttribute(field, typeof(DisplayAttribute));
+
+                        <option value="@enumValue">@displayAttribute.Name</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => defect.CompletedReason)" />
+            </div>
+        }
 
         <div class="form-group">
             <label class="col-sm-2 col-form-label">Current owner</label>
@@ -103,7 +150,7 @@ else
             <ValidationMessage For="@(() => defect.CurrentUserId)" />
         </div>
 
-        <label for="usersSelect">Select Users:</label>
+        <label for="usersSelect">Notify</label>
         @foreach (var item in usersCheckbox)
         {
             <div class="form-check">
@@ -113,7 +160,7 @@ else
         }
 
         <br>
-        <button type="submit" class="btn btn-primary">Report defect</button>
+        <button type="submit" class="btn btn-primary">Update Defect</button>
     </EditForm>
 }
 
@@ -126,6 +173,9 @@ else
     private List<ApplicationUser> applicationUsers = new List<ApplicationUser>();
     private List<UsersViewModel> usersCheckbox = new List<UsersViewModel>();
 
+    [Parameter]
+    public string DefectId { get; set; }
+
     @inject AuthenticationStateProvider GetAuthenticationStateAsync
 
     protected override async Task OnInitializedAsync()
@@ -134,19 +184,10 @@ else
 
         var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
 
-        defect.Description = 
-        "Example of description\n1. Reproduction step\n\t1.1. Start the software\n\t1.2. Do action\n\t1.3. SW throws excepction <yours exception>\n2. Environment setup\n\t2.1. OS: Windows 11\n\t2.2. RAM: 16GB\n\t2.3. CPU: Intel I5 11400\n3. Regression\n\t- Yes, it was working on SW_x_x_x but issue occurs after <change>";
-
         try
         {
             releases = await client.GetFromJsonAsync<List<Release>>("api/management/getreleases");
             applicationUsers = await client.GetFromJsonAsync<List<ApplicationUser>>("api/user/getusers");
-
-            foreach (var user in applicationUsers)
-            {
-                usersCheckbox.Add(new UsersViewModel() { UserName = @user.FirstName + " " + @user.LastName, Email = user.Email, IsChecked = false });
-            }
-
 
             releases.Insert(index: 0, new Release
             {
@@ -162,6 +203,26 @@ else
 
             softwareBuilds = await client.GetFromJsonAsync<List<SoftwareBuild>>("api/management/getsoftwarebuilds");
             tests = await client.GetFromJsonAsync<List<Test>>("api/test/gettests");
+
+            defect = await client.GetFromJsonAsync<Defect>($"api/defect/getdefectdetails/{Convert.ToInt32(DefectId)}");
+
+            List<string> usersEmails = defect.UsersInvolvedEmails.Split(";").ToList();
+
+            foreach (var user in applicationUsers)
+            {
+                if (usersEmails.Contains(user.Email))
+                {
+                    usersCheckbox.Add(new UsersViewModel() { UserName = @user.FirstName + " " + @user.LastName, Email = user.Email, IsChecked = true });
+
+                }
+                else
+                {
+                    usersCheckbox.Add(new UsersViewModel() { UserName = @user.FirstName + " " + @user.LastName, Email = user.Email, IsChecked = false });
+                }
+            }
+
+            usersCheckbox.RemoveAt(index: 0);
+
             defect.OwnerName = authstate.User.Identity.Name;
             defect.OwnerId = applicationUsers.First(user => user.Email == defect.OwnerName).Id;
         }
@@ -188,13 +249,10 @@ else
         StateHasChanged();
     }
 
-    private async Task CreateDefect()
+    private async Task UpdateDefect()
     {
         var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
-        defect.Created = DateTime.Now;
-        defect.Status = DefectStatusEnum.New;
-        defect.CurrentuserName = applicationUsers.First(user => user.Id == defect.CurrentUserId).UserName;
-        defect.CompletedReason = DefectCompletedReasonEnum.InProgress;
+
         var usersEmails = usersCheckbox.Where(item => item.IsChecked).Select(item => item.Email).ToList();
 
         if (!usersEmails.Contains(defect.OwnerName))
@@ -204,28 +262,41 @@ else
 
         defect.UsersInvolvedEmails = string.Join(";", usersEmails);
 
-        var response = await client.PostAsJsonAsync("/api/defect/createDefect", defect);
-
-        if (response.IsSuccessStatusCode)
+        try
         {
-            message = await response.Content.ReadAsStringAsync();
-        }
-        else
-        {
-            message = "Failed to create defect.";
-        }
+            var response = await client.PutAsJsonAsync($"api/defect/updateDefect/{Convert.ToInt32(DefectId)}", defect);
 
-        @inject IEmailService EmailService
+            if (response.IsSuccessStatusCode)
+            {
+                @inject IEmailService EmailService
 
-        var emailServiceResponse = await client.PostAsJsonAsync("/api/email/defectSendEmails", defect);
+                var emailServiceResponse = await client.PostAsJsonAsync("/api/email/updateSendEmails", defect);
 
-        if (emailServiceResponse.IsSuccessStatusCode)
-        {
-            message = await response.Content.ReadAsStringAsync();
+                if (emailServiceResponse.IsSuccessStatusCode)
+                {
+                    this.GoBackToIndex();
+                }
+                else
+                {
+                    message = "Failed to send email notifications.";
+                }
+                this.GoBackToIndex();
+            }
+            else
+            {
+                message = await response.Content.ReadAsStringAsync();
+            }
         }
-        else
+        catch (Exception ex)
         {
-            message = "Failed to send email notifications.";
+            message = ex.Message;
         }
+    }
+
+    @inject NavigationManager NavigationManager
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/defect/index");
     }
 }

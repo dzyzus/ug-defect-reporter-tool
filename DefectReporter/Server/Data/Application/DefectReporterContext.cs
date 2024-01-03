@@ -102,6 +102,12 @@
                 .HasForeignKey(d => d.SoftwareId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Defect>()
+                .HasOne(d => d.Test)
+                .WithMany(r => r.Defects)
+                .HasForeignKey(d => d.TestId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<Release>().HasData(
                 new { Id = 1, Name = "Pre-Alpha" },
                 new { Id = 2, Name = "Alpha" },
