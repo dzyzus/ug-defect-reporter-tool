@@ -6,30 +6,47 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-6">
-            <canvas id="myPieChart" width="400" height="200"></canvas>
+        <div class="col-md-5">
+            <h3 class="text-center">ACTUAL PROGRESS</h3>
+            <canvas id="fixedChart" width="400" height="200"></canvas>
         </div>
-        <div class="col-md-6">
-            <canvas id="myPieChart" width="400" height="200"></canvas>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <h3 class="text-center">ACTUAL STATUS</h3>
+            <canvas id="statusChart" width="400" height="200"></canvas>
         </div>
     </div>
-
+    <br />
     <div class="row">
-        <div class="col-md-6">
-            <canvas id="myPieChart" width="300" height="200"></canvas>
+        <div class="col-md-5">
+            <h3 class="text-center">COMPLETED INFORMATION</h3>
+            <canvas id="completedChart" width="400" height="200"></canvas>
         </div>
-        <div class="col-md-6">
-            <canvas id="myPieChart" width="300" height="200"></canvas>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <h3 class="text-center">REGRESSION INFORMATION</h3>
+            <canvas id="regressionChart" width="400" height="200"></canvas>
         </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class"col-md-1"></div>
+        <div class"col-md-10">
+            <h3 class="text-center">FREQUENCY OF DEFECTS</h3>
+            <canvas id="barChartCanvas" width="400" height="200"></canvas>
+        </div>
+        <div class"col-md-1"></div>
     </div>
 </div>
 
-@inject IJSRuntime JSRuntime
 @inject IHttpClientFactory HttpClientFactory
 
 @code {
     private List<DefectModel> defects;
-    private string[] labels = { "Defects", "Fixed Defects" };
+    private string[] labelsFixed = { "Not fixed", "Fixed" };
+    private string[] labelsStatus = { "New", "Resolved", "Open", "Rejected" };
+    private string[] completedInfo = { "Fixed", "Not a defect", "In progress", "Will be not fixed" };
+    private string[] regressionInfo = { "Regression", "Not a regression" };
 
     private async Task CreateChart()
     {
@@ -38,16 +55,53 @@
             var defectsCount = defects.Count(d => !d.IsFixed);
             var fixedDefectsCount = defects.Count(d => d.IsFixed);
 
-            var data = new int[] { defectsCount, fixedDefectsCount };
+            var dataFixed = new int[] { defectsCount, fixedDefectsCount };
 
-            await JSRuntime.InvokeVoidAsync("createPieChart", "myPieChart", labels, data);
+            var newCount = defects.Count(d => d.Status == DefectReporter.Shared.Enums.DefectStatusEnum.New);
+            var resolvedCount = defects.Count(d => d.Status == DefectReporter.Shared.Enums.DefectStatusEnum.Resolved);
+            var openCount = defects.Count(d => d.Status == DefectReporter.Shared.Enums.DefectStatusEnum.Open);
+            var rejectedCount = defects.Count(d => d.Status == DefectReporter.Shared.Enums.DefectStatusEnum.Rejected);
+
+            var statusData = new int[] { newCount, resolvedCount, openCount, rejectedCount };
+
+            var fixedCount = defects.Count(d => d.CompletedReason == DefectReporter.Shared.Enums.DefectCompletedReasonEnum.Fixed);
+            var notADefectCount = defects.Count(d => d.CompletedReason == DefectReporter.Shared.Enums.DefectCompletedReasonEnum.NotADefect);
+            var inProgressCount = defects.Count(d => d.CompletedReason == DefectReporter.Shared.Enums.DefectCompletedReasonEnum.InProgress);
+            var willBeNotFixedCount = defects.Count(d => d.CompletedReason == DefectReporter.Shared.Enums.DefectCompletedReasonEnum.WillBeNotFixed);
+
+            var completedData = new int[] { fixedCount, resolvedCount, openCount, rejectedCount };
+
+            var regressions = defects.Count(d => !d.IsRegression);
+            var notRegression = defects.Count(d => d.IsRegression);
+
+            var regressionData = new int[] { regressions, notRegression };
+
+            var defectsByStartDate = defects
+                .GroupBy(d => d.Created.Date)
+                .OrderBy(g => g.Key)
+                .Select(g => new
+                {
+                    Date = g.Key.ToString("yyyy-MM-dd"),
+                    Count = g.Count()
+                })
+                .ToList();
+
+            var barChartLabels = defectsByStartDate.Select(d => d.Date).ToArray();
+            var barChartData = defectsByStartDate.Select(d => d.Count).ToArray();
+
+            @inject IJSRuntime JSRuntime
+            await JSRuntime.InvokeVoidAsync("createPieChart", "fixedChart", labelsFixed, dataFixed);
+            await JSRuntime.InvokeVoidAsync("createPieChartFourColors", "statusChart", labelsStatus, statusData);
+            await JSRuntime.InvokeVoidAsync("createPieChartFourColors", "completedChart", completedInfo, completedData);
+            await JSRuntime.InvokeVoidAsync("createPieChart", "regressionChart", regressionInfo, regressionData);
+            await JSRuntime.InvokeVoidAsync("createBarChart", "barChartCanvas", barChartLabels, barChartData);
         }
     }
 
     protected override async Task OnInitializedAsync()
     {
         await LoadData();
-        await CreateChart(); // Przeniesienie wywołania CreateChart tutaj
+        await CreateChart();
     }
 
     private async Task LoadData()
