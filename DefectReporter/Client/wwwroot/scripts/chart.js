@@ -34,7 +34,7 @@ function createBarChart(canvasId, labels, data) {
     if (canvas) {
         var ctx = canvas.getContext('2d');
 
-        var barChartOptions = {
+        var barChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: labels,
@@ -49,15 +49,9 @@ function createBarChart(canvasId, labels, data) {
             options: {
                 scales: {
                     x: {
-                        type: 'time',
-                        time: {
-                            unit: 'day',
-                            parser: 'YYYY-MM-DD',
-                            tooltipFormat: 'll',
-                            displayFormats: {
-                                day: 'YYYY-MM-DD'
-                            }
-                        }
+                        type: 'category',
+                        labels: labels,
+                        beginAtZero: true
                     },
                     y: {
                         beginAtZero: true,
@@ -65,9 +59,7 @@ function createBarChart(canvasId, labels, data) {
                     }
                 }
             }
-        };
-
-        var barChart = new Chart(ctx, barChartOptions);
+        });
     } else {
         console.error("Canvas element with id '" + canvasId + "' not found.");
     }
