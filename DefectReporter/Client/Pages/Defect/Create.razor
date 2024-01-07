@@ -81,7 +81,7 @@ else
             <InputSelect id="release" class="form-control" @bind-Value="defect.TestId">
                 @foreach (var test in tests)
                 {
-                    <option value="@test.Id">@test.TestName</option>
+                    <option value="@test.Id">@test.TestName - @test.TypeOfTest</option>
                 }
             </InputSelect>
             <ValidationMessage For="@(() => defect.TestId)" />
@@ -104,7 +104,7 @@ else
             <ValidationMessage For="@(() => defect.CurrentUserId)" />
         </div>
 
-        <label for="usersSelect">Select Users:</label>
+        <label for="usersSelect">Notify</label>
         @foreach (var item in usersCheckbox)
         {
             <div class="form-check">
