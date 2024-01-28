@@ -8,8 +8,9 @@
         <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/register">Register</a>
-        <a href="authentication/login">Log in</a>
+        @{
+            Navigation.NavigateTo("authentication/login");
+        }
     </NotAuthorized>
 </AuthorizeView>
 

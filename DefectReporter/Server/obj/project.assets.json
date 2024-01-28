@@ -3236,6 +3236,15 @@
           }
         }
       },
+      "Microsoft.Web.Infrastructure/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
+        }
+      },
       "Microsoft.Win32.Primitives/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3306,6 +3315,22 @@
         },
         "runtime": {
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
+        }
+      },
+      "Navigation/1.11.0": {
+        "type": "package",
+        "dependencies": {
+          "WebActivatorEx": "2.0.0"
+        },
+        "compile": {
+          "lib/4.5/Navigation.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/4.5/Navigation.dll": {
+            "related": ".xml"
+          }
         }
       },
       "NETStandard.Library/1.6.1": {
@@ -5264,6 +5289,18 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
+        }
+      },
+      "WebActivatorEx/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "lib/net40/WebActivatorEx.dll": {}
+        },
+        "runtime": {
+          "lib/net40/WebActivatorEx.dll": {}
         }
       },
       "DefectReporter.Client/1.0.0": {
@@ -9552,6 +9589,18 @@
         "microsoft.visualstudio.web.codegenerators.mvc.nuspec"
       ]
     },
+    "Microsoft.Web.Infrastructure/1.0.0": {
+      "sha512": "FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg==",
+      "type": "package",
+      "path": "microsoft.web.infrastructure/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Microsoft.Web.Infrastructure.dll",
+        "microsoft.web.infrastructure.1.0.0.nupkg.sha512",
+        "microsoft.web.infrastructure.nuspec"
+      ]
+    },
     "Microsoft.Win32.Primitives/4.3.0": {
       "sha512": "9ZQKCWxH7Ijp9BfahvL2Zyf1cJIk8XYLF6Yjzr2yi0b2cOut/HQ31qf1ThHAgCc3WiZMdnWcfJCgN82/0UunxA==",
       "type": "package",
@@ -9670,6 +9719,54 @@
         "lib/netstandard2.0/Mono.TextTemplating.dll",
         "mono.texttemplating.2.2.1.nupkg.sha512",
         "mono.texttemplating.nuspec"
+      ]
+    },
+    "Navigation/1.11.0": {
+      "sha512": "9GKPbxTXoJ98zePxiyaD1wOfqhMVl0k2EU8cAi2TJezf2Sn2mMsos1oLmoIaMI7umQNUdNA+IwLQhr1pTpi36w==",
+      "type": "package",
+      "path": "navigation/1.11.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/2.0/App_Browsers/Navigation.browser",
+        "content/2.0/StateInfo.config",
+        "content/2.0/web.config.transform",
+        "content/3.0/App_Browsers/Navigation.browser",
+        "content/3.0/StateInfo.config",
+        "content/3.0/web.config.transform",
+        "content/3.5/App_Browsers/Navigation.browser",
+        "content/3.5/StateInfo.config",
+        "content/3.5/web.config.transform",
+        "content/4.0/App_Browsers/Navigation.browser",
+        "content/4.0/App_Start/FluentStateInfoConfig.cs.pp",
+        "content/4.0/App_Start/FluentStateInfoConfig.vb.pp",
+        "content/4.0/Scripts/navigation.mvc.js",
+        "content/4.0/Scripts/navigation.mvc.min.js",
+        "content/4.0/StateInfo.config",
+        "content/4.0/web.config.transform",
+        "content/4.5/App_Browsers/Navigation.browser",
+        "content/4.5/App_Start/FluentStateInfoConfig.cs.pp",
+        "content/4.5/App_Start/FluentStateInfoConfig.vb.pp",
+        "content/4.5/Scripts/navigation.mvc.js",
+        "content/4.5/Scripts/navigation.mvc.min.js",
+        "content/4.5/StateInfo.config",
+        "content/4.5/web.config.transform",
+        "lib/2.0/Navigation.dll",
+        "lib/2.0/Navigation.xml",
+        "lib/3.0/Navigation.dll",
+        "lib/3.0/Navigation.xml",
+        "lib/3.5/Navigation.dll",
+        "lib/3.5/Navigation.xml",
+        "lib/4.0/Navigation.dll",
+        "lib/4.0/Navigation.xml",
+        "lib/4.5/Navigation.dll",
+        "lib/4.5/Navigation.xml",
+        "navigation.1.11.0.nupkg.sha512",
+        "navigation.nuspec",
+        "readme.txt",
+        "tools/4.0/install.ps1",
+        "tools/4.5/install.ps1"
       ]
     },
     "NETStandard.Library/1.6.1": {
@@ -14169,6 +14266,18 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "WebActivatorEx/2.0.0": {
+      "sha512": "B3ZbOEaGCqa7BLjZZw6wqprOJJMvP39h7Lr5ADkJOCPKHppAaCre34kR63/gfgpM4htzTfgm/pEw7r7qqqMgIA==",
+      "type": "package",
+      "path": "webactivatorex/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/WebActivatorEx.dll",
+        "webactivatorex.2.0.0.nupkg.sha512",
+        "webactivatorex.nuspec"
+      ]
+    },
     "DefectReporter.Client/1.0.0": {
       "type": "project",
       "path": "../Client/DefectReporter.Client.csproj",
@@ -14191,6 +14300,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.12",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.12",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 7.0.11",
+      "Navigation >= 1.11.0",
       "System.IdentityModel.Tokens.Jwt >= 7.0.3"
     ]
   },
@@ -14276,6 +14386,10 @@
             "target": "Package",
             "version": "[7.0.11, )"
           },
+          "Navigation": {
+            "target": "Package",
+            "version": "[1.11.0, )"
+          },
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",
             "version": "[7.0.3, )"
@@ -14303,5 +14417,37 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Pakiet „Microsoft.Web.Infrastructure 1.0.0” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net7.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "libraryId": "Microsoft.Web.Infrastructure",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Pakiet „Navigation 1.11.0” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net7.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "libraryId": "Navigation",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Pakiet „WebActivatorEx 2.0.0” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net7.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "libraryId": "WebActivatorEx",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }

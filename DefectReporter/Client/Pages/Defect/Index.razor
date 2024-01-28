@@ -1,14 +1,22 @@
 ﻿@page "/defect/index"
 
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text">
+                <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control" @bind="searchTerm" id="featureSearch" placeholder="Search by title" />
+        </div>
+    </div>
+</div>
+
 @using DefectReporter.Shared.Models.Application
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-
 @inject IHttpClientFactory HttpClientFactory
 
 @if (defects.Count != 0)
 {
-    <h3>Lista defektów</h3>
-
     <table class="table">
         <thead>
             <tr>
@@ -21,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var defect in defects)
+            @foreach (var defect in filteredDefects)
             {
                 <tr>
                     <td>@defect.Title</td>
@@ -55,6 +63,13 @@ else
 @code {
     List<Defect> defects = new List<Defect>();
 
+    string searchTerm = string.Empty;
+
+    List<Defect> filteredDefects => defects.Where(defect =>
+        string.IsNullOrWhiteSpace(searchTerm) ||
+        defect.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+    ).ToList();
+
     /// <summary>
     /// The on initlizaed async.
     /// </summary>
@@ -85,7 +100,7 @@ else
         {
             var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
 
-            var response = await client.DeleteAsync($"api/feature/deleteDefect/{defectId}");
+            var response = await client.DeleteAsync($"api/defect/deleteDefect/{defectId}");
 
             if (response.IsSuccessStatusCode)
             {

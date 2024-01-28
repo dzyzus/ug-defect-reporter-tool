@@ -1,0 +1,157 @@
+﻿@page "/test/details/{TestId}"
+
+@using DefectReporter.Shared.Models.Application
+@using DefectReporter.Shared.Enums
+
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager NavigationManager
+
+@if (message != null)
+{
+    <p>@message</p>
+}
+else if (test.TestName != null && features.Count != null && defects.Count != null)
+{
+    <h3>@test.TestName</h3>
+    <hr />
+    <br />
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Test information</h5>
+                        <hr>
+                        <div class="form-group">
+                            <label for="testCase"><b>Test case:</b></label>
+                            <ul style="list-style-type: none">
+                                @foreach (var step in test.TestCase.Split('\n'))
+                                {
+                                    <li>@step.Trim()</li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <label for="isAutomated"><b>Test is automated:</b></label>
+                            <span class="form-control-plaintext" id="isAutomated">@test.IsAutomated.ToString()</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="typeOfTest"><b>Type of test:</b></label>
+                            <span class="form-control-plaintext" id="typeOfTest">@test.TypeOfTest.ToString()</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="component"><b>Component:</b></label>
+                            <span class="form-control-plaintext" id="component">@test.Component.ToString()</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Features</h5>
+                        <hr>
+                        <ul>
+                            @foreach (Feature feature in features)
+                            {
+                                <li class="d-flex align-items-center mb-2">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" @onclick="() => GoToFeature(feature.Id)">@feature.Title</button>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Defects</h5>
+                        <hr>
+                        <ul>
+                            @foreach (Defect defect in defects)
+                            {
+                                <li class="d-flex align-items-center mb-2">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" @onclick="() => GoToDefect(defect.Id)">@defect.Title</button>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary" @onclick="GoBackToIndex">Back</button>
+            </div>
+        </div>
+        <br>
+    </div>
+}
+else
+{
+    <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+        <div class="spinner-border text-center" role="status" style="width: 5rem; height: 5rem;">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string TestId { get; set; }
+
+    private Test test = new Test();
+    private List<Defect> defects = new List<Defect>();
+    private List<Feature> features = new List<Feature>();
+    private string releaseName;
+    private string message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("DefectReporter.ServerAPI");
+
+        try
+        {
+            test = await client.GetFromJsonAsync<Test>($"api/test/gettest/{TestId}");
+
+            var defectsContext = await client.GetFromJsonAsync<List<Defect>>("api/defect/getdefects");
+            var featuresContext = await client.GetFromJsonAsync<List<Feature>>("api/feature/getfeatures");
+
+            defects = defectsContext.Where(defect => defect.TestId == Convert.ToInt32(TestId)).ToList();
+            features = featuresContext.Where(feature => feature.Id == test.FeatureId).ToList();
+
+            if (defects.Count == 0)
+            {
+                defects.Add(new Defect() { Title = "None" });
+            }
+
+            if (test == null)
+            {
+                message = "Test not found.";
+            }
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private void GoBackToIndex()
+    {
+        NavigationManager.NavigateTo("/test/index");
+    }
+
+    private void GoToDefect(int defectId)
+    {
+        NavigationManager.NavigateTo($"/defect/getdefectdetails/{defectId}");
+    }
+
+    private void GoToFeature(int featureId)
+    {
+        NavigationManager.NavigateTo($"/feature/details/{featureId}");
+    }
+}

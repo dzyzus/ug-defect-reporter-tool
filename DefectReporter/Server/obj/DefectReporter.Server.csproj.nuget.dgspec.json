@@ -180,6 +180,10 @@
               "target": "Package",
               "version": "[7.0.11, )"
             },
+            "Navigation": {
+              "target": "Package",
+              "version": "[1.11.0, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[7.0.3, )"

@@ -42,7 +42,7 @@ else if (coveredByTests != null)
             @foreach (Test test in coveredByTests)
             {
                 <div class="card-header">
-                    TCD: @test.TestName
+                    <button type="button" class="btn btn-sm btn-outline-primary" @onclick="() => GoToTest(test.Id)">@test.TestName</button>
                 </div>
                 <div class="card-body">
                     <p class="card-text">
@@ -59,6 +59,14 @@ else if (coveredByTests != null)
     </div>
     <br>
     <button type="button" class="btn btn-primary" @onclick="GoBackToIndex">Back</button>
+}
+else
+{
+    <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+        <div class="spinner-border text-center" role="status" style="width: 5rem; height: 5rem;">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 }
 
 @code {
@@ -104,4 +112,10 @@ else if (coveredByTests != null)
     {
         NavigationManager.NavigateTo("/feature/index");
     }
+
+    private void GoToTest(int testId)
+    {
+        NavigationManager.NavigateTo($"/test/details/{testId}");
+    }
+
 }

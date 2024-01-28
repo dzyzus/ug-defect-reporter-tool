@@ -1,13 +1,22 @@
 ﻿@page "/feature/index"
 
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text">
+                <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control" @bind="searchTerm" id="featureSearch" placeholder="Search by title" />
+        </div>
+    </div>
+</div>
+
 @using DefectReporter.Shared.Models.Application
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject IHttpClientFactory HttpClientFactory
 
 @if (features.Count != 0)
 {
-    <h3>Features list</h3>
-
     <table class="table">
         <thead>
             <tr>
@@ -19,7 +28,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var feature in features)
+            @foreach (var feature in filteredFeatures)
             {
                 <tr>
                     <td>@feature.Title</td>
@@ -27,9 +36,9 @@
                     <td>@feature.Component</td>
                     <td>@releases.First(release => release.Id == feature.ReleaseId)?.Name</td>
                     <td>
-                        <button type="button" class="btn btn-success" @onclick="() => GetDetails(feature.Id)">Details</button>
-                        <button type="button" class="btn btn-primary" @onclick="() => EditFeature(feature.Id)">Edit</button>
-                        <button type="button" class="btn btn-danger" @onclick="() => DeleteFeature(feature.Id)">Delete</button>
+                        <button type="button" class="btn btn-sm btn-success" @onclick="() => GetDetails(feature.Id)">Details</button>
+                        <button type="button" class="btn btn-sm btn-primary" @onclick="() => EditFeature(feature.Id)">Edit</button>
+                        <button type="button" class="btn btn-sm btn-danger" @onclick="() => DeleteFeature(feature.Id)">Delete</button>
                     </td>
                 </tr>
             }
@@ -38,7 +47,7 @@
 }
 else if (features == null)
 {
-    <h3>Currently there is no features in database.</h3>
+    <h3>Currently there is no features in the database.</h3>
 }
 else
 {
@@ -52,6 +61,12 @@ else
 @code {
     List<Feature> features = new List<Feature>();
     List<Release> releases = new List<Release>();
+    string searchTerm = string.Empty;
+
+    List<Feature> filteredFeatures => features.Where(feature =>
+        string.IsNullOrWhiteSpace(searchTerm) ||
+        feature.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+    ).ToList();
 
     protected override async Task OnInitializedAsync()
     {

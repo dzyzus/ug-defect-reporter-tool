@@ -1,5 +1,16 @@
 ﻿@page "/test/index"
 
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text">
+                <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control" @bind="searchTerm" id="testSearch" placeholder="Search by title" />
+        </div>
+    </div>
+</div>
+
 @using DefectReporter.Shared.Models.Application
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject IHttpClientFactory HttpClientFactory
@@ -19,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var test in tests)
+            @foreach (var test in filteredTests)
             {
                 <tr>
                     <td>@test.TestName</td>
@@ -33,8 +44,9 @@
                      </td>
                     <td>@test.TypeOfTest</td>
                     <td>
-                        <button type="button" class="btn btn-primary" @onclick="() => EditTest(test.Id)">Edit</button>
-                        <button type="button" class="btn btn-danger" @onclick="() => DeleteTest(test.Id)">Delete</button>
+                        <button type="button" class="btn btn-sm btn-success" @onclick="() => TestDetails(test.Id)">Details</button>
+                        <button type="button" class="btn btn-sm btn-primary" @onclick="() => EditTest(test.Id)">Edit</button>
+                        <button type="button" class="btn btn-sm btn-danger" @onclick="() => DeleteTest(test.Id)">Delete</button>
                     </td>
                 </tr>
             }
@@ -56,6 +68,12 @@ else
 
 @code {
     List<Test> tests = new List<Test>();
+    string searchTerm = string.Empty;
+
+    List<Test> filteredTests => tests.Where(test =>
+    string.IsNullOrWhiteSpace(searchTerm) ||
+    test.TestName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+    ).ToList();
 
     protected override async Task OnInitializedAsync()
     {
@@ -76,6 +94,11 @@ else
     private void EditTest(int testId)
     {
         NavigationManager.NavigateTo($"/test/updatetest/{testId}");
+    }
+
+    private void TestDetails(int testId)
+    {
+        NavigationManager.NavigateTo($"/test/details/{testId}");
     }
 
     @inject IJSRuntime JS

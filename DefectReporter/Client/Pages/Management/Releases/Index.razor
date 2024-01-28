@@ -1,5 +1,16 @@
 ﻿@page "/management/releases/index"
 
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text">
+                <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control" @bind="searchTerm" id="releaseSearch" placeholder="Search by name" />
+        </div>
+    </div>
+</div>
+
 @using DefectReporter.Shared.Models.Application
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject IHttpClientFactory HttpClientFactory
@@ -15,7 +26,7 @@
             <h3>Available Releases</h3>
         </div>
         <ul class="list-group list-group-flush">
-            @foreach (Release release in releases)
+            @foreach (Release release in filteredReleases)
             {
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>@release.Name</span>
@@ -43,6 +54,12 @@ else
 
 @code {
     List<Release> releases = new List<Release>();
+    string searchTerm = string.Empty;
+
+    List<Release> filteredReleases => releases.Where(release =>
+        string.IsNullOrWhiteSpace(searchTerm) ||
+        release.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+    ).ToList();
 
     protected override async Task OnInitializedAsync()
     {

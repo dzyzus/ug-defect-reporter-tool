@@ -53,7 +53,6 @@
         [HttpPost("defectSendEmails")]
         public async Task<IActionResult> DefectSendEmails([FromBody] Defect defect)
         {
-            string title = $"[DEFECT NOTIFY] {defect.Title}";
             List<string> usersEmails = defect.UsersInvolvedEmails.Split(";").ToList();
 
             string[] text = defect.Description.Split('\n');
@@ -88,7 +87,14 @@
             {
                 foreach (var userEmail in usersEmails)
                 {
-                    await emailService.SendEmailAsync(userEmail, title, body);
+                    if (defect.OwnerName.Contains(userEmail))
+                    {
+                        await emailService.SendEmailAsync(userEmail, $"[OWNER] [DEFECT CREATED] {defect.Title}", body);
+                    }
+                    else
+                    {
+                        await emailService.SendEmailAsync(userEmail, $"[DEFECT CREATED] {defect.Title}", body);
+                    }
                 }
 
                 return Ok("Emails sent successfully.");
@@ -111,7 +117,6 @@
         [HttpPost("updateSendEmails")]
         public async Task<IActionResult> UpdateSendEmails([FromBody] Defect defect)
         {
-            string title = $"[DEFECT NOTIFY] UPDATE - {defect.Title}";
             List<string> usersEmails = defect.UsersInvolvedEmails.Split(";").ToList();
 
             string body = $"Defect was updated. Please review changes.";
@@ -120,7 +125,15 @@
             {
                 foreach (var userEmail in usersEmails)
                 {
-                    await emailService.SendEmailAsync(userEmail, title, body);
+                    if (defect.OwnerName.Contains(userEmail))
+                    {
+                        await emailService.SendEmailAsync(userEmail, $"[OWNER] [DEFECT UPDATED] - {defect.Title}", body);
+                    }
+                    else
+                    {
+                        await emailService.SendEmailAsync(userEmail, $"[DEFECT UPDATED] - {defect.Title}", body);
+
+                    }
                 }
 
                 return Ok("Emails sent successfully.");
